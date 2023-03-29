@@ -1,0 +1,19 @@
+import React from "react"
+import { Routes, Route } from "react-router-dom"
+
+import Layout from "../app/Layout.component"
+import PlayerSearchPage from "../features/playerSearch/PlayerSearchPage.component"
+import PlayerHistoryPage from "../features/PlayerHistoryPage.component"
+
+const AppRouter = () => {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<PlayerSearchPage />} />
+        <Route path="/:id" element={<PlayerHistoryPage />} />
+      </Route>
+    </Routes>
+  )
+}
+
+export default AppRouter

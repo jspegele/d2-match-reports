@@ -1,11 +1,7 @@
-import Layout from "./app/Layout.component"
-
-import PlayerSearch from "./features/PlayerSearch.component"
+import AppRouter from "./app/AppRouter"
 
 const App = () => (
-  <Layout>
-    <PlayerSearch />
-  </Layout>
+  <AppRouter />
 )
 
 export default App

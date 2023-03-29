@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+import { BrowserRouter } from "react-router-dom"
 
 import { CssBaseline } from "@mui/material"
 
@@ -9,9 +10,11 @@ import CustomizedTheme from "./app/CustomizedTheme"
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <React.StrictMode>
-    <CustomizedTheme>
-      <CssBaseline />
-      <App />
-    </CustomizedTheme>
+    <BrowserRouter>
+      <CustomizedTheme>
+        <CssBaseline />
+        <App />
+      </CustomizedTheme>
+    </BrowserRouter>
   </React.StrictMode>
 )
