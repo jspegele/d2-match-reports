@@ -3,6 +3,7 @@ import { DateTime } from "luxon"
 import axios from "axios"
 
 import {
+  Button,
   Paper,
   Table,
   TableBody,
@@ -21,14 +22,15 @@ const PlayerActivityHistory = ({
   activeCharId,
 }) => {
   const [history, setHistory] = useState([])
-  // const [test, setTest] = useState(null)
+  const [page, setPage] = useState(0)
+  const [mode, setMode] = useState(5)
+  // mode=5 is all pvp. for all valid values see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
 
   useEffect(() => {
     function fetchActivityHistory() {
       axios
         .get(
-          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${activeCharId}/Stats/Activities/?page=0&mode=5`,
-          // mode=5 is all pvp. for all valid values see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
+          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${activeCharId}/Stats/Activities/?page=${page}&mode=${mode}`,
           {
             headers: {
               "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
@@ -36,7 +38,12 @@ const PlayerActivityHistory = ({
           }
         )
         .then((res) => {
-          setHistory(res.data.Response.activities)
+          if (page === 0) setHistory(res.data.Response.activities)
+          else
+            setHistory((prevState) => [
+              ...prevState,
+              ...res.data.Response.activities,
+            ])
         })
         .catch((error) => {
           console.log(error.message)
@@ -44,7 +51,9 @@ const PlayerActivityHistory = ({
     }
 
     fetchActivityHistory()
-  }, [membershipType, membershipId, activeCharId])
+  }, [membershipType, membershipId, activeCharId, page, mode])
+
+  const handleAddPage = () => setPage(prevPage => prevPage + 1)
 
   // useEffect(() => {
   //   function fetchActivityHistory() {
@@ -58,7 +67,7 @@ const PlayerActivityHistory = ({
   //         }
   //       )
   //       .then((res) => {
-  //         setTest(res.data.Response)
+  //         console.log(res.data.Response)
   //       })
   //       .catch((error) => {
   //         console.log(error.message)
@@ -69,16 +78,8 @@ const PlayerActivityHistory = ({
   // }, [])
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} id="infinite-scroll-container">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Period</TableCell>
-            <TableCell>Mode</TableCell>
-            <TableCell>Location (ref id)</TableCell>
-            <TableCell>Membership Type</TableCell>
-          </TableRow>
-        </TableHead>
         <TableBody>
           {history.length > 0 &&
             history.map((activity) => (
@@ -88,7 +89,9 @@ const PlayerActivityHistory = ({
                     "ccc dd LLL yyyy"
                   )}
                 </TableCell>
-                <TableCell>{getModeDisplayName(activity.activityDetails.mode)}</TableCell>
+                <TableCell>
+                  {getModeDisplayName(activity.activityDetails.mode)}
+                </TableCell>
                 <TableCell>
                   {
                     DestinyActivityDefinition[
@@ -96,11 +99,19 @@ const PlayerActivityHistory = ({
                     ].displayProperties.name
                   }
                 </TableCell>
-                <TableCell>{activity.activityDetails.membershipType}</TableCell>
               </TableRow>
             ))}
         </TableBody>
       </Table>
+      <Button
+        color="primary"
+        fullWidth
+        onClick={handleAddPage}
+        variant="contained"
+        sx={{ marginTop: 2 }}
+      >
+        Show more
+      </Button>
     </TableContainer>
   )
 }
