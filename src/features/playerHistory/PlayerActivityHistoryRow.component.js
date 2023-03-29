@@ -42,11 +42,23 @@ const PlayerActivityHistoryRow = ({ activity, alt }) => {
         }
         </Typography>
       </Box>
-      <Box alignItems="center" display="flex" p={2}>
+      <Box alignItems="center" display="flex" px={.5} py={2} width="2rem">
         <Typography fontSize=".875rem">
           {DestinyClassDefinition[activity.classHash].classType === 0 && 'T'}
           {DestinyClassDefinition[activity.classHash].classType === 1 && 'H'}
           {DestinyClassDefinition[activity.classHash].classType === 2 && 'W'}
+        </Typography>
+      </Box>
+      <Box alignItems="center" display="flex" px={.5} py={2} width="5rem">
+        <Typography fontSize=".875rem">
+          {activity.values.killsDeathsRatio.basic.displayValue}
+          <Typography component="span" color="text.secondary" display="inline" fontSize=".675rem" marginLeft="2px">K/D</Typography>
+        </Typography>
+      </Box>
+      <Box alignItems="center" display="flex" pl={.5} pr={2} py={2} width="5rem">
+        <Typography fontSize=".875rem">
+          {activity.values.efficiency.basic.displayValue}
+          <Typography component="span" color="text.secondary" display="inline" fontSize=".675rem" marginLeft="2px">KA/D</Typography>
         </Typography>
       </Box>
     </Box>
