@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 
-import { Card, CardContent, Skeleton, Typography } from "@mui/material"
+import { Box, CardContent, Skeleton, Typography } from "@mui/material"
 import PlayerActivityHistory from "./PlayerActivityHistory.component"
 
 const PlayerHistoryPage = () => {
@@ -32,26 +32,23 @@ const PlayerHistoryPage = () => {
   }, [membershipType, membershipId])
 
   return (
-    <Card>
-      <CardContent>
-        {profile ? (
-          <>
-            <Typography pb={3}>
-              {profile.profile.data.userInfo.bungieGlobalDisplayName}#
-              {profile.profile.data.userInfo.bungieGlobalDisplayNameCode}{" "}
-              Activity History
-            </Typography>
-            <PlayerActivityHistory
-              membershipType={membershipType}
-              membershipId={membershipId}
-              activeCharId={Object.keys(profile.characters.data)[0]}
-            />
-          </>
-        ) : (
-          <Skeleton sx={{ minWidth: "300px" }} />
-        )}
-      </CardContent>
-    </Card>
+    <Box width="700px">
+      {profile ? (
+        <>
+          <Typography fontSize="2.25rem" pb={3} textAlign="center">
+            {profile.profile.data.userInfo.bungieGlobalDisplayName}#
+            {profile.profile.data.userInfo.bungieGlobalDisplayNameCode}{" "}
+          </Typography>
+          <PlayerActivityHistory
+            membershipType={membershipType}
+            membershipId={membershipId}
+            activeCharId={Object.keys(profile.characters.data)[0]}
+          />
+        </>
+      ) : (
+        <Skeleton height={80} width={"100%"} />
+      )}
+    </Box>
   )
 }
 

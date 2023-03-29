@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { DateTime } from "luxon"
 
-import {
-  Button,
-  Paper,
-  Table,
-  TableBody,
-  TableContainer,
-} from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 
 import PlayerActivityHistoryRow from "./PlayerActivityHistoryRow.component"
 
@@ -75,16 +70,45 @@ const PlayerActivityHistory = ({
   // }, [])
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableBody>
-          {history.length > 0 &&
-            history.map((activity) => (
-              <PlayerActivityHistoryRow key={activity.activityDetails.instanceId} activity={activity} />
-            ))
-          }
-        </TableBody>
-      </Table>
+    <Box sx={{ maxWidth: "800px", width: "100%" }}>
+      {history
+        .reduce(
+          (acc, rec) =>
+            acc.includes(
+              DateTime.fromISO(rec.period).toFormat("cccc dd LLL yyyy")
+            )
+              ? acc
+              : [
+                  ...acc,
+                  DateTime.fromISO(rec.period).toFormat(
+                    "cccc dd LLL yyyy"
+                  ),
+                ],
+          []
+        )
+        .map((period, i) => (
+          <React.Fragment key={i}>
+            <Box pb={1} pt={3} px={2} width="100%">
+              <Typography textAlign="center">{period}</Typography>
+            </Box>
+            {history.map((activity, j) => {
+              if (
+                DateTime.fromISO(activity.period).toFormat(
+                  "cccc dd LLL yyyy"
+                ) === period
+              ) {
+                return (
+                  <PlayerActivityHistoryRow
+                    key={activity.activityDetails.instanceId}
+                    activity={activity}
+                    alt={j % 2}
+                  />
+                )
+              }
+              return null
+            })}
+          </React.Fragment>
+        ))}
       <Button
         color="primary"
         fullWidth
@@ -95,7 +119,7 @@ const PlayerActivityHistory = ({
       >
         Load more
       </Button>
-    </TableContainer>
+    </Box>
   )
 }
 
