@@ -117,8 +117,7 @@ const PlayerActivityHistory = ({
         variant="contained"
         sx={{ marginTop: 2 }}
       >
-        <span className="disabled-text">Loading more items...</span>
-        <span className="active-text">Show more</span>
+        Load more
       </Button>
     </TableContainer>
   )
