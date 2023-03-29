@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { DateTime } from "luxon"
 import axios from "axios"
 
 import {
@@ -7,13 +6,10 @@ import {
   Paper,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
-  TableRow,
 } from "@mui/material"
 
-import { getModeDisplayName } from "./getModeDisplayName"
-import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
+import PlayerActivityHistoryRow from "./PlayerActivityHistoryRow.component"
 
 const PlayerActivityHistory = ({
   membershipType,
@@ -26,10 +22,6 @@ const PlayerActivityHistory = ({
   // mode=5 is all pvp. for all valid values see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
 
   const handleAddPage = () => setPage((prevPage) => prevPage + 1)
-
-  useEffect(() => {
-    console.log('render')
-  }, []);
 
   useEffect(() => {
     function fetchActivityHistory() {
@@ -88,23 +80,7 @@ const PlayerActivityHistory = ({
         <TableBody>
           {history.length > 0 &&
             history.map((activity) => (
-              <TableRow key={activity.activityDetails.instanceId}>
-                <TableCell>
-                  {DateTime.fromISO(activity.period).toFormat(
-                    "ccc dd LLL yyyy"
-                  )}
-                </TableCell>
-                <TableCell>
-                  {getModeDisplayName(activity.activityDetails.mode)}
-                </TableCell>
-                <TableCell>
-                  {
-                    DestinyActivityDefinition[
-                      activity.activityDetails.referenceId
-                    ].displayProperties.name
-                  }
-                </TableCell>
-              </TableRow>
+              <PlayerActivityHistoryRow key={activity.activityDetails.instanceId} activity={activity} />
             ))
           }
         </TableBody>
