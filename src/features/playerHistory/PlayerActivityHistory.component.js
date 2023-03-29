@@ -27,7 +27,8 @@ const PlayerActivityHistory = ({
     function fetchActivityHistory() {
       axios
         .get(
-          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${activeCharId}/Stats/Activities/?page=0`,
+          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${activeCharId}/Stats/Activities/?page=0&mode=5`,
+          // mode=5 is all pvp. for all valid values see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
           {
             headers: {
               "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
@@ -75,8 +76,6 @@ const PlayerActivityHistory = ({
             <TableCell>Period</TableCell>
             <TableCell>Mode</TableCell>
             <TableCell>Location (ref id)</TableCell>
-            <TableCell>Activity Type</TableCell>
-            <TableCell>Playlist (dir hash)</TableCell>
             <TableCell>Membership Type</TableCell>
           </TableRow>
         </TableHead>
@@ -94,20 +93,6 @@ const PlayerActivityHistory = ({
                   {
                     DestinyActivityDefinition[
                       activity.activityDetails.referenceId
-                    ].displayProperties.name
-                  }
-                </TableCell>
-                <TableCell>
-                  {
-                    DestinyActivityDefinition[
-                      activity.activityDetails.referenceId
-                    ].activityTypeHash
-                  }
-                </TableCell>
-                <TableCell>
-                  {
-                    DestinyActivityDefinition[
-                      activity.activityDetails.directorActivityHash
                     ].displayProperties.name
                   }
                 </TableCell>
