@@ -40,9 +40,9 @@ const PlayerHistoryPage = () => {
             {profile.profile.data.userInfo.bungieGlobalDisplayNameCode}{" "}
           </Typography>
           <PlayerActivityHistory
+            characters={profile.characters.data}
             membershipType={membershipType}
             membershipId={membershipId}
-            activeCharId={Object.keys(profile.characters.data)[0]}
           />
         </>
       ) : (

@@ -6,6 +6,7 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 
 import { getModeDisplayName } from "./getModeDisplayName"
 import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
+import DestinyClassDefinition from "../../manifests/DestinyClassDefinition.json"
 
 const PlayerActivityHistoryRow = ({ activity, alt }) => {
   return (
@@ -39,6 +40,13 @@ const PlayerActivityHistoryRow = ({ activity, alt }) => {
           DestinyActivityDefinition[activity.activityDetails.referenceId]
             .displayProperties.name
         }
+        </Typography>
+      </Box>
+      <Box alignItems="center" display="flex" p={2}>
+        <Typography fontSize=".875rem">
+          {DestinyClassDefinition[activity.classHash].classType === 0 && 'T'}
+          {DestinyClassDefinition[activity.classHash].classType === 1 && 'H'}
+          {DestinyClassDefinition[activity.classHash].classType === 2 && 'W'}
         </Typography>
       </Box>
     </Box>

@@ -7,10 +7,11 @@ import { Box, Button, Typography } from "@mui/material"
 import PlayerActivityHistoryRow from "./PlayerActivityHistoryRow.component"
 
 const PlayerActivityHistory = ({
+  characters,
   membershipType,
   membershipId,
-  activeCharId,
 }) => {
+  const [loading, setLoading] = useState(true)
   const [history, setHistory] = useState([])
   const [page, setPage] = useState(0)
   const [mode, setMode] = useState(5)
@@ -19,33 +20,37 @@ const PlayerActivityHistory = ({
   const handleAddPage = () => setPage((prevPage) => prevPage + 1)
 
   useEffect(() => {
-    function fetchActivityHistory() {
-      axios
-        .get(
-          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${activeCharId}/Stats/Activities/?page=${page}&mode=${mode}`,
-          {
-            headers: {
-              "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
-            },
-          }
-        )
-        .then((res) => {
-          if (page === 0) {
-            setHistory(res.data.Response.activities)
-          } else {
-            setHistory((prevState) => [
-              ...prevState,
-              ...res.data.Response.activities,
-            ])
-          }
-        })
-        .catch((error) => {
-          console.log(error.message)
-        })
+    async function fetchActivityHistory() {
+      let charData = { 1: {}, 2: {}, 3: {} }
+      let charIds = Object.keys(characters)
+      for (let i = 0; i < charIds.length; i++) {
+        await axios
+          .get(
+            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${charIds[i]}/Stats/Activities/?page=${page}&mode=${mode}`,
+            {
+              headers: {
+                "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
+              },
+            }
+          )
+          .then((res) => {
+            charData[i] = res.data.Response.activities.map((activity) => ({
+              characterId: charIds[i],
+              classHash: characters[charIds[i]].classHash,
+              ...activity,
+            }))
+          })
+          .catch((error) => {
+            console.log(error.message)
+          })
+      }
+      const combinedCharData = [...charData[0], ...charData[1], ...charData[2]]
+      setHistory(combinedCharData.sort((a,b) => (a.period > b.period) ? -1 : ((b.period > a.period) ? 1 : 0)))
+      setLoading(false)
     }
 
     fetchActivityHistory()
-  }, [membershipType, membershipId, activeCharId, page, mode])
+  }, [characters, membershipType, membershipId, page, mode])
 
   // useEffect(() => {
   //   function fetchActivityHistory() {
@@ -80,9 +85,7 @@ const PlayerActivityHistory = ({
               ? acc
               : [
                   ...acc,
-                  DateTime.fromISO(rec.period).toFormat(
-                    "cccc dd LLL yyyy"
-                  ),
+                  DateTime.fromISO(rec.period).toFormat("cccc dd LLL yyyy"),
                 ],
           []
         )
