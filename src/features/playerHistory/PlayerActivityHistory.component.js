@@ -9,7 +9,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from "@mui/material"
 
@@ -26,6 +25,12 @@ const PlayerActivityHistory = ({
   const [mode, setMode] = useState(5)
   // mode=5 is all pvp. for all valid values see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
 
+  const handleAddPage = () => setPage((prevPage) => prevPage + 1)
+
+  useEffect(() => {
+    console.log('render')
+  }, []);
+
   useEffect(() => {
     function fetchActivityHistory() {
       axios
@@ -38,12 +43,14 @@ const PlayerActivityHistory = ({
           }
         )
         .then((res) => {
-          if (page === 0) setHistory(res.data.Response.activities)
-          else
+          if (page === 0) {
+            setHistory(res.data.Response.activities)
+          } else {
             setHistory((prevState) => [
               ...prevState,
               ...res.data.Response.activities,
             ])
+          }
         })
         .catch((error) => {
           console.log(error.message)
@@ -52,8 +59,6 @@ const PlayerActivityHistory = ({
 
     fetchActivityHistory()
   }, [membershipType, membershipId, activeCharId, page, mode])
-
-  const handleAddPage = () => setPage(prevPage => prevPage + 1)
 
   // useEffect(() => {
   //   function fetchActivityHistory() {
@@ -78,7 +83,7 @@ const PlayerActivityHistory = ({
   // }, [])
 
   return (
-    <TableContainer component={Paper} id="infinite-scroll-container">
+    <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableBody>
           {history.length > 0 &&
@@ -100,17 +105,20 @@ const PlayerActivityHistory = ({
                   }
                 </TableCell>
               </TableRow>
-            ))}
+            ))
+          }
         </TableBody>
       </Table>
       <Button
         color="primary"
         fullWidth
+        id="infinite-scroll-button"
         onClick={handleAddPage}
         variant="contained"
         sx={{ marginTop: 2 }}
       >
-        Show more
+        <span className="disabled-text">Loading more items...</span>
+        <span className="active-text">Show more</span>
       </Button>
     </TableContainer>
   )
