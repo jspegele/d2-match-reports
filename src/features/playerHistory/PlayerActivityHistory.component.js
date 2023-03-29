@@ -21,7 +21,7 @@ const PlayerActivityHistory = ({
   activeCharId,
 }) => {
   const [history, setHistory] = useState([])
-  const [test, setTest] = useState(null)
+  // const [test, setTest] = useState(null)
 
   useEffect(() => {
     function fetchActivityHistory() {
@@ -45,27 +45,27 @@ const PlayerActivityHistory = ({
     fetchActivityHistory()
   }, [membershipType, membershipId, activeCharId])
 
-  useEffect(() => {
-    function fetchActivityHistory() {
-      axios
-        .get(
-          `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/12889663020/ `,
-          {
-            headers: {
-              "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
-            },
-          }
-        )
-        .then((res) => {
-          setTest(res.data.Response)
-        })
-        .catch((error) => {
-          console.log(error.message)
-        })
-    }
+  // useEffect(() => {
+  //   function fetchActivityHistory() {
+  //     axios
+  //       .get(
+  //         `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/12889663020/ `,
+  //         {
+  //           headers: {
+  //             "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
+  //           },
+  //         }
+  //       )
+  //       .then((res) => {
+  //         setTest(res.data.Response)
+  //       })
+  //       .catch((error) => {
+  //         console.log(error.message)
+  //       })
+  //   }
 
-    fetchActivityHistory()
-  }, [])
+  //   fetchActivityHistory()
+  // }, [])
 
   return (
     <TableContainer component={Paper}>
