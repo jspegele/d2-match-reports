@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom"
 
 import Layout from "../app/Layout.component"
 import PlayerSearchPage from "../features/playerSearch/PlayerSearchPage.component"
-import PlayerHistoryPage from "../features/PlayerHistoryPage.component"
+import PlayerHistoryPage from "../features/playerHistory/PlayerHistoryPage.component"
 
 const AppRouter = () => {
   return (
