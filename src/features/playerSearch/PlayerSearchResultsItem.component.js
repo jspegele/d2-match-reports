@@ -6,7 +6,12 @@ import { ListItem, ListItemButton, ListItemText } from "@mui/material"
 const PlayerSearchResultsItem = ({ player }) => {
   const navigate = useNavigate()
 
-  const handleClick = () => navigate(`/${player.bungieNetMembershipId}`)
+  const handleClick = () => {
+    if (player.destinyMemberships.length > 0) {
+      const primaryMembership = player.destinyMemberships[0]
+      navigate(`/${primaryMembership.membershipType}/${primaryMembership.membershipId}`)
+    }
+  }
 
   return (
     <ListItem disablePadding>
