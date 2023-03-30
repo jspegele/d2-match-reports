@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 
-import { Box, CardContent, Skeleton, Typography } from "@mui/material"
+import { Box, CardContent, CircularProgress, Skeleton, Typography } from "@mui/material"
 import PlayerActivityHistory from "./PlayerActivityHistory.component"
 
 const PlayerHistoryPage = () => {
@@ -32,9 +32,9 @@ const PlayerHistoryPage = () => {
   }, [membershipType, membershipId])
 
   return (
-    <Box margin="0 auto" maxWidth="700px" minWidth="500px" width="100%">
+    <>
       {profile ? (
-        <>
+        <Box margin="0 auto" maxWidth="700px" minWidth="500px" width="100%">
           <Typography fontSize="2.25rem" pb={3} textAlign="center">
             {profile.profile.data.userInfo.bungieGlobalDisplayName}#
             {profile.profile.data.userInfo.bungieGlobalDisplayNameCode}{" "}
@@ -44,11 +44,13 @@ const PlayerHistoryPage = () => {
             membershipType={membershipType}
             membershipId={membershipId}
           />
-        </>
+        </Box>
       ) : (
-        <Skeleton height={80} width={"100%"} />
+        <Box alignItems="center" display="flex" justifyContent="center" flexGrow="1">
+          <CircularProgress size={40} />
+        </Box>
       )}
-    </Box>
+    </>
   )
 }
 
