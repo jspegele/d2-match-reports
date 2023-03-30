@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 
 import { useTheme } from "@emotion/react"
-import { Box, IconButton, Typography } from "@mui/material"
+import { Box, IconButton, Typography, useMediaQuery } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 
 import { AppContext } from "../contexts/AppContext"
@@ -10,6 +10,7 @@ import { ReactComponent as DestinyIcon } from "../images/icons/destiny.svg"
 
 const Header = () => {
   const theme = useTheme()
+  const isMedium = useMediaQuery("(min-width:900px)")
   const { openDrawer } = useContext(AppContext)
 
   return (
@@ -22,11 +23,13 @@ const Header = () => {
       pb={4}
       width="100%"
     >
-      <Box left="0" position="absolute" p={1} top="0">
-        <IconButton aria-label="open drawer" onClick={openDrawer} sx={{ marginRight: "auto" }}>
-          <ArrowBackIcon color="text.secondary" />
-        </IconButton>
-      </Box>
+      {!isMedium && (
+        <Box left="0" position="absolute" p={1} top="0">
+          <IconButton aria-label="open drawer" onClick={openDrawer} sx={{ marginRight: "auto" }}>
+            <ArrowBackIcon color="text.secondary" />
+          </IconButton>
+        </Box>
+      )}
       <Box
         component={DestinyIcon}
         fill={theme.palette.text.primary}
