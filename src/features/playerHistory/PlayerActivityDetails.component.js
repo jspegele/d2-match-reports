@@ -39,8 +39,8 @@ const PlayerActivityDetails = ({ activity }) => {
       borderTop="1px solid rgba(144, 202, 249, .5)"
       display="flex"
       flexDirection="column"
-      minHeight="200px"
-      p={2}
+      px={2}
+      py={4}
     >
       {carnageReport &&
         DestinyActivityDefinition[activity.activityDetails.directorActivityHash]
