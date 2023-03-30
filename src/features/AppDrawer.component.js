@@ -1,10 +1,12 @@
 import React, { useContext } from "react"
 
-import { Drawer, useMediaQuery } from "@mui/material"
+import { Box, Drawer, useMediaQuery } from "@mui/material"
 
 import Header from "./Header.component"
 import PlayerSearch from "./playerSearch/PlayerSearch.component"
 import { AppContext } from "../contexts/AppContext"
+
+import titanImage from "../images/joseph-biwald-d2-guardian-art-titan.jpg"
 
 const AppDrawer = ({ drawerWidth }) => {
   const isMedium = useMediaQuery("(min-width:900px)")
@@ -21,14 +23,20 @@ const AppDrawer = ({ drawerWidth }) => {
         flexShrink: 0,
         width: drawerWidth,
         "& .MuiDrawer-paper": {
+          background: `url("${titanImage}")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          border: "none",
           boxShadow: "2rem 0px 2rem 0px rgba(0,0,0,0.25)",
           boxSizing: "border-box",
           width: drawerWidth,
         },
       }}
     >
-      <Header />
-      <PlayerSearch />
+      <Box bgcolor="rgba(18, 18, 18, .95)" height="100%" width="100%">
+        <Header />
+        <PlayerSearch />
+      </Box>
     </Drawer>
   )
 }

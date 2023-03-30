@@ -11,7 +11,7 @@ const Layout = () => {
   const isMedium = useMediaQuery("(min-width:900px)")
   const isLarge = useMediaQuery("(min-width:1200px)")
 
-  const drawerWidth = isLarge ? "360px" : isMedium ? "30%" : isSmall ? "60%" : "96%"
+  const drawerWidth = isLarge ? "473px" : isMedium ? "40%" : isSmall ? "60%" : "96%"
 
   return (
     <>
