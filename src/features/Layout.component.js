@@ -6,6 +6,8 @@ import { Outlet } from "react-router-dom"
 import Header from "./Header.component"
 import AppDrawer from "./AppDrawer.component"
 
+import CrucibleBg from "../images/bg-crucible.png"
+
 const Layout = () => {
   const isSmall = useMediaQuery("(min-width:600px)")
   const isMedium = useMediaQuery("(min-width:900px)")
@@ -32,6 +34,7 @@ const Layout = () => {
           flexGrow="1"
           paddingTop={isMedium ? "2rem" : 0}
           width="100%"
+          sx={{ backgroundImage: `url("${CrucibleBg}")`, backgroundPosition: "center 25vh", backgroundSize: "50vh", backgroundRepeat: "no-repeat" }}
         >
           <Outlet />
         </Box>
