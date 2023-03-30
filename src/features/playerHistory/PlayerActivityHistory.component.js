@@ -4,7 +4,7 @@ import { DateTime } from "luxon"
 
 import { Box, Button, Typography } from "@mui/material"
 
-import PlayerActivityHistoryRow from "./PlayerActivityHistoryRow.component"
+import PlayerActivityHistoryItem from "./PlayerActivityHistoryItem.component"
 
 const PlayerActivityHistory = ({
   characters,
@@ -143,7 +143,7 @@ const PlayerActivityHistory = ({
                 ) === period
               ) {
                 return (
-                  <PlayerActivityHistoryRow
+                  <PlayerActivityHistoryItem
                     key={activity.activityDetails.instanceId}
                     activity={activity}
                     alt={j % 2}

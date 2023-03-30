@@ -8,7 +8,7 @@ import { getModeDisplayName } from "./getModeDisplayName"
 import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
 import DestinyClassDefinition from "../../manifests/DestinyClassDefinition.json"
 
-const PlayerActivityHistoryRow = ({ activity, alt }) => {
+const PlayerActivityHistoryItem = ({ activity, alt }) => {
   return (
     <Box
       key={activity.activityDetails.instanceId}
@@ -65,4 +65,4 @@ const PlayerActivityHistoryRow = ({ activity, alt }) => {
   )
 }
 
-export default PlayerActivityHistoryRow
+export default PlayerActivityHistoryItem
