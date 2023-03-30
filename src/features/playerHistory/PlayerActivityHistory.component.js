@@ -14,10 +14,10 @@ const PlayerActivityHistory = ({
   const [loading, setLoading] = useState(true)
   const [history, setHistory] = useState([])
   const [page, setPage] = useState(0)
+  const groupSize = 25
+  const [numRows, setNumRows] = useState(groupSize)
   const [mode, setMode] = useState(5)
   // mode=5 is all pvp. for all valid values see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
-
-  const handleAddPage = () => setPage((prevPage) => prevPage + 1)
 
   useEffect(() => {
     async function fetchActivityHistory() {
@@ -26,7 +26,7 @@ const PlayerActivityHistory = ({
       for (let i = 0; i < charIds.length; i++) {
         await axios
           .get(
-            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${charIds[i]}/Stats/Activities/?page=${page}&mode=${mode}`,
+            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${charIds[i]}/Stats/Activities/?page=0&mode=${mode}`,
             {
               headers: {
                 "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
@@ -45,12 +45,53 @@ const PlayerActivityHistory = ({
           })
       }
       const combinedCharData = [...charData[0], ...charData[1], ...charData[2]]
-      setHistory(combinedCharData.sort((a,b) => (a.period > b.period) ? -1 : ((b.period > a.period) ? 1 : 0)))
+      setHistory(
+        combinedCharData.sort((a, b) =>
+          a.period > b.period ? -1 : b.period > a.period ? 1 : 0
+        )
+      )
+      setPage(1)
       setLoading(false)
     }
 
     fetchActivityHistory()
-  }, [characters, membershipType, membershipId, page, mode])
+  }, [characters, membershipType, membershipId, mode])
+
+  const handleLoadMore = async () => {
+    let charData = { 1: {}, 2: {}, 3: {} }
+    let charIds = Object.keys(characters)
+    for (let i = 0; i < charIds.length; i++) {
+      await axios
+        .get(
+          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${charIds[i]}/Stats/Activities/?page=${page}&mode=${mode}`,
+          {
+            headers: {
+              "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
+            },
+          }
+        )
+        .then((res) => {
+          charData[i] = res.data.Response.activities.map((activity) => ({
+            characterId: charIds[i],
+            classHash: characters[charIds[i]].classHash,
+            ...activity,
+          }))
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
+    }
+    const combinedCharData = [...charData[0], ...charData[1], ...charData[2]]
+    setHistory((prevState) => [
+      ...prevState,
+      ...combinedCharData.sort((a, b) =>
+        a.period > b.period ? -1 : b.period > a.period ? 1 : 0
+      ),
+    ])
+    setPage((prevState) => prevState + 1)
+    setNumRows((prevState) => prevState + groupSize)
+    setLoading(false)
+  }
 
   // useEffect(() => {
   //   function fetchActivityHistory() {
@@ -77,6 +118,7 @@ const PlayerActivityHistory = ({
   return (
     <Box sx={{ maxWidth: "800px", width: "100%" }}>
       {history
+        .slice(0, numRows)
         .reduce(
           (acc, rec) =>
             acc.includes(
@@ -94,7 +136,7 @@ const PlayerActivityHistory = ({
             <Box pb={1} pt={3} px={2} width="100%">
               <Typography textAlign="center">{period}</Typography>
             </Box>
-            {history.map((activity, j) => {
+            {history.slice(0, numRows).map((activity, j) => {
               if (
                 DateTime.fromISO(activity.period).toFormat(
                   "cccc dd LLL yyyy"
@@ -116,7 +158,7 @@ const PlayerActivityHistory = ({
         color="primary"
         fullWidth
         id="infinite-scroll-button"
-        onClick={handleAddPage}
+        onClick={handleLoadMore}
         variant="contained"
         sx={{ marginTop: 2 }}
       >
