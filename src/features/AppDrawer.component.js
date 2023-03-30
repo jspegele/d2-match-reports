@@ -27,7 +27,7 @@ const AppDrawer = ({ drawerWidth }) => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           border: "none",
-          boxShadow: "2rem 0px 2rem 0px rgba(0,0,0,0.25)",
+          boxShadow: "5px 0px 5px 0px rgba(0,0,0,0.25)",
           boxSizing: "border-box",
           width: drawerWidth,
         },
