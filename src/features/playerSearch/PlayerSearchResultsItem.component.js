@@ -1,14 +1,18 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { Box, ListItem, ListItemButton, Typography } from "@mui/material"
 
+import { AppContext } from "../../contexts/AppContext"
+
 const PlayerSearchResultsItem = ({ player }) => {
   const navigate = useNavigate()
+  const { closeDrawer } = useContext(AppContext)
 
   const handleClick = () => {
     if (player.destinyMemberships.length > 0) {
       const primaryMembership = player.destinyMemberships[0]
+      closeDrawer()
       navigate(
         `/${primaryMembership.membershipType}/${primaryMembership.membershipId}`
       )

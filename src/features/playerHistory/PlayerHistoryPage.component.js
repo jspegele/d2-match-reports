@@ -32,7 +32,7 @@ const PlayerHistoryPage = () => {
   }, [membershipType, membershipId])
 
   return (
-    <Box width="700px" margin="0 auto">
+    <Box margin="0 auto" maxWidth="700px" minWidth="500px" width="100%">
       {profile ? (
         <>
           <Typography fontSize="2.25rem" pb={3} textAlign="center">
