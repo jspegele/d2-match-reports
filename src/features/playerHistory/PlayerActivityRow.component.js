@@ -6,7 +6,7 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 
 import { getModeDisplayName } from "./getModeDisplayName"
 import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
-import DestinyClassDefinition from "../../manifests/DestinyClassDefinition.json"
+import PlayerActivityRowClassIcon from "./PlayerActivityRowClassIcon.component"
 
 const PlayerActivityRow = ({
   activity,
@@ -14,6 +14,7 @@ const PlayerActivityRow = ({
   activeRow,
   toggleShowDetails,
 }) => {
+
   return (
     <Box
       key={activity.activityDetails.instanceId}
@@ -53,13 +54,7 @@ const PlayerActivityRow = ({
           }
         </Typography>
       </Box>
-      <Box alignItems="center" display="flex" px={0.5} py={2} width="2rem">
-        <Typography fontSize=".875rem">
-          {DestinyClassDefinition[activity.classHash].classType === 0 && "T"}
-          {DestinyClassDefinition[activity.classHash].classType === 1 && "H"}
-          {DestinyClassDefinition[activity.classHash].classType === 2 && "W"}
-        </Typography>
-      </Box>
+      <PlayerActivityRowClassIcon classHash={activity.classHash} />
       <Box alignItems="center" display="flex" px={0.5} py={2} width="5rem">
         <Typography fontSize=".875rem">
           {activity.values.killsDeathsRatio.basic.displayValue}
