@@ -93,28 +93,6 @@ const PlayerActivityHistory = ({
     setLoading(false)
   }
 
-  // useEffect(() => {
-  //   function fetchActivityHistory() {
-  //     axios
-  //       .get(
-  //         `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/12889663020/ `,
-  //         {
-  //           headers: {
-  //             "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
-  //           },
-  //         }
-  //       )
-  //       .then((res) => {
-  //         console.log(res.data.Response)
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message)
-  //       })
-  //   }
-
-  //   fetchActivityHistory()
-  // }, [])
-
   return (
     <Box sx={{ maxWidth: "800px", width: "100%" }}>
       {history
