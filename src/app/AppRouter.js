@@ -1,7 +1,7 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
 
-import Layout from "../app/Layout.component"
+import Layout from "../features/Layout.component"
 import HomePage from "../features/HomePage.component"
 import PlayerHistoryPage from "../features/playerHistory/PlayerHistoryPage.component"
 import ManifestPage from "../features/manifest/ManifestPage.component"

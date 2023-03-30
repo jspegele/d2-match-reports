@@ -6,7 +6,7 @@ import PlayerSearchResultsItem from "./PlayerSearchResultsItem.component"
 const PlayerSearchResults = ({ players, searching }) => (
   <Box
     sx={{
-      bgcolor: "rgba((18,18,18,1.0)",
+      bgcolor: "rgba((18, 18, 18, 1.0)",
       maxHeight: "30vh",
       maxWidth: "400px",
       overflow: "auto",
