@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-
 import { Box } from "@mui/material"
+
+import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
+import PlayerActivityDetailsScore from "./PlayerActivityDetailsScore.component"
 
 const PlayerActivityDetails = ({ activity }) => {
   const [carnageReport, setCarnageReport] = useState(null)
@@ -26,16 +28,26 @@ const PlayerActivityDetails = ({ activity }) => {
     }
 
     fetchActivityHistory()
-  }, [])
+  }, [activity.activityDetails.instanceId])
 
   return (
     <Box
+      alignItems="center"
       backgroundColor="rgba(144, 202, 249, .06)"
       borderBottom="1px solid rgba(144, 202, 249, .5)"
       borderTop="1px solid rgba(144, 202, 249, .5)"
+      display="flex"
+      flexDirection="column"
       minHeight="200px"
     >
-      
+      {carnageReport &&
+        DestinyActivityDefinition[activity.activityDetails.directorActivityHash]
+          .isPvP && (
+          <PlayerActivityDetailsScore
+            activityDetails={carnageReport.activityDetails}
+            teams={carnageReport.teams}
+          />
+        )}
     </Box>
   )
 }
