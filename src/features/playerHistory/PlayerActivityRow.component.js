@@ -52,7 +52,9 @@ const PlayerActivityRow = ({
         }
       </Typography>
     </Box>
-    <PlayerActivityRowClassIcon classHash={activity.classHash} />
+    <Box alignItems="center" display="flex" px={2}>
+      <PlayerActivityRowClassIcon classHash={activity.classHash} />
+    </Box>
     <Box alignItems="center" display="flex" px={0.5} py={2} width="5rem">
       <Typography fontSize=".875rem">
         {activity.values.killsDeathsRatio.basic.displayValue}

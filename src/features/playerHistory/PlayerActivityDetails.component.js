@@ -4,6 +4,7 @@ import { Box } from "@mui/material"
 
 import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
 import PlayerActivityDetailsScore from "./PlayerActivityDetailsScore.component"
+import PlayerActivityDetailsStandings from "./PlayerActivityDetailsStandings.component"
 
 const PlayerActivityDetails = ({ activity }) => {
   const [carnageReport, setCarnageReport] = useState(null)
@@ -39,14 +40,21 @@ const PlayerActivityDetails = ({ activity }) => {
       display="flex"
       flexDirection="column"
       minHeight="200px"
+      p={2}
     >
       {carnageReport &&
         DestinyActivityDefinition[activity.activityDetails.directorActivityHash]
           .isPvP && (
-          <PlayerActivityDetailsScore
-            activityDetails={carnageReport.activityDetails}
-            teams={carnageReport.teams}
-          />
+            <>
+              <PlayerActivityDetailsScore
+                activityDetails={carnageReport.activityDetails}
+                teams={carnageReport.teams}
+              />
+              <PlayerActivityDetailsStandings
+                entries={carnageReport.entries}
+                teams={carnageReport.teams}
+              />
+            </>
         )}
     </Box>
   )

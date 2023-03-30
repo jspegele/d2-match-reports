@@ -16,7 +16,7 @@ const PlayerActivityDetailsScore = ({ activityDetails, teams }) => {
   const theme = useTheme()
 
   return (
-    <Box alignItems="center" display="flex" justifyContent="center" py={2}>
+    <Box alignItems="center" display="flex" justifyContent="center" pb={2}>
       {teams[0].standing.basic.value === 0 ? (
         <CheckCircleIcon color="success" sx={{ fontSize: 20, mr: 1 }} />
       ) : (
