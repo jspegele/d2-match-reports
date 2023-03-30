@@ -6,7 +6,7 @@ import PlayerActivityDetailsStandingsTable from "./PlayerActivityDetailsStanding
 
 const PlayerActivityDetailsStandings = ({ entries, teams }) => {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={4}>
       {teams.map((team) => (
         <Grid item xs={teams.length === 1 ? 12 : 6}>
           <PlayerActivityDetailsStandingsTable
