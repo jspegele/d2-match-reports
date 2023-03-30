@@ -132,16 +132,17 @@ const PlayerActivityHistory = ({
             })}
           </React.Fragment>
         ))}
-      <Button
-        color="primary"
-        fullWidth
-        id="infinite-scroll-button"
-        onClick={handleLoadMore}
-        variant="contained"
-        sx={{ marginTop: 2 }}
-      >
-        Load more
-      </Button>
+      {history.length >= 25 && (
+        <Button
+          color="primary"
+          fullWidth
+          onClick={handleLoadMore}
+          variant="contained"
+          sx={{ marginTop: 2 }}
+        >
+          Load more
+        </Button>
+      )}
     </Box>
   )
 }
