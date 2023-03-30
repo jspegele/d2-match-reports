@@ -8,7 +8,6 @@ import { ReactComponent as ClassTitanIcon } from "../../images/icons/class-titan
 import { ReactComponent as ClassWarlockIcon } from "../../images/icons/class-warlock.svg"
 
 const PlayerActivityRowClassIcon = ({ classHash }) => {
-  console.log(classHash)
   const theme = useTheme()
   return (
     <Box
