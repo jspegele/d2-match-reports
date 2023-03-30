@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 
-import { TextField } from "@mui/material"
+import { CircularProgress, InputAdornment, TextField } from "@mui/material"
+import SearchIcon from "@mui/icons-material/Search"
 
 const page = 0
 let controller
 
-const PlayerSearchBox = ({ setSearchResults }) => {
-  const [displayName, setDisplayName] = useState("")
+const PlayerSearchBox = ({ displayName, setDisplayName, setSearchResults, searching, setSearching }) => {
   const handleDisplayNameChange = (e) => setDisplayName(e.target.value)
 
   useEffect(() => {
@@ -15,6 +15,7 @@ const PlayerSearchBox = ({ setSearchResults }) => {
     controller = new AbortController()
 
     function fetchPlayerSearchResults() {
+      setSearching(true)
       axios
         .post(
           `https://www.bungie.net/Platform/User/Search/GlobalName/${page}/`,
@@ -30,6 +31,7 @@ const PlayerSearchBox = ({ setSearchResults }) => {
         )
         .then((res) => {
           setSearchResults(res.data.Response.searchResults)
+          setSearching(false)
         })
         .catch((error) => {
           if (axios.isCancel(error)) {
@@ -48,10 +50,28 @@ const PlayerSearchBox = ({ setSearchResults }) => {
   return (
     <TextField
       fullWidth
+      InputProps={{
+        endAdornment: searching ? (
+          <CircularProgress size={16} />
+        ) : null,
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon sx={{ color: "text.secondary", fontSize: "1.25rem" }} />
+          </InputAdornment>
+        ),
+        style: { fontSize: ".875rem" },
+      }}
       onChange={handleDisplayNameChange}
-      placeholder="Guardian Lookup"
+      placeholder="BungieName"
       value={displayName}
       variant="outlined"
+      sx={{
+        "& fieldset": {
+          borderLeft: "none",
+          borderRadius: 0,
+          borderRight: "none",
+        },
+      }}
     />
   )
 }
