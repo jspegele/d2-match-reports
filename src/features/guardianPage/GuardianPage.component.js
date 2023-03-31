@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 
 import { Box, CircularProgress, Typography } from "@mui/material"
-import PlayerActivityHistory from "../playerHistory/PlayerActivityHistory.component"
+import History from "../guardianActivity/History.component"
 
 const GuardianPage = () => {
   const { membershipType, membershipId } = useParams()
@@ -39,7 +39,7 @@ const GuardianPage = () => {
             {profile.profile.data.userInfo.bungieGlobalDisplayName}#
             {profile.profile.data.userInfo.bungieGlobalDisplayNameCode}{" "}
           </Typography>
-          <PlayerActivityHistory
+          <History
             characters={profile.characters.data}
             membershipType={membershipType}
             membershipId={membershipId}

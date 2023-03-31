@@ -12,7 +12,7 @@ import { ReactComponent as TrialsIcon } from "../../images/icons/faction-osiris.
 const ironBannerModes = [19, 43, 44, 45, 68, 90, 91]
 const trialsModes = [39, 41, 42, 84]
 
-const PlayerActivityDetailsScore = ({ activityDetails, teams }) => {
+const DetailsScore = ({ activityDetails, teams }) => {
   const theme = useTheme()
 
   return (
@@ -61,4 +61,4 @@ const PlayerActivityDetailsScore = ({ activityDetails, teams }) => {
   )
 }
 
-export default PlayerActivityDetailsScore
+export default DetailsScore

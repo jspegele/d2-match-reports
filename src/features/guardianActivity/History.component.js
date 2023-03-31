@@ -4,14 +4,13 @@ import { DateTime } from "luxon"
 
 import { Box, Button, Typography } from "@mui/material"
 
-import PlayerActivityItem from "./PlayerActivityItem.component"
+import HistoryItem from "./HistoryItem.component"
 
-const PlayerActivityHistory = ({
+const History = ({
   characters,
   membershipType,
   membershipId,
 }) => {
-  const [loading, setLoading] = useState(true)
   const [history, setHistory] = useState([])
   const [page, setPage] = useState(0)
   const groupSize = 25
@@ -51,7 +50,6 @@ const PlayerActivityHistory = ({
         )
       )
       setPage(1)
-      setLoading(false)
     }
 
     fetchActivityHistory()
@@ -90,7 +88,6 @@ const PlayerActivityHistory = ({
     ])
     setPage((prevState) => prevState + 1)
     setNumRows((prevState) => prevState + groupSize)
-    setLoading(false)
   }
 
   return (
@@ -121,7 +118,7 @@ const PlayerActivityHistory = ({
                 ) === period
               ) {
                 return (
-                  <PlayerActivityItem
+                  <HistoryItem
                     key={activity.activityDetails.instanceId}
                     activity={activity}
                     altRow={j % 2}
@@ -147,4 +144,4 @@ const PlayerActivityHistory = ({
   )
 }
 
-export default PlayerActivityHistory
+export default History

@@ -2,9 +2,9 @@ import React from "react"
 
 import { Grid, Typography } from "@mui/material"
 
-import PlayerActivityDetailsStandingsTableRow from "./PlayerActivityDetailsStandingsTableRow.component"
+import DetailsStandingsTableRow from "./DetailsStandingsTableRow.component"
 
-const PlayerActivityDetailsStandingsTable = ({ players, winner }) => {
+const DetailsStandingsTable = ({ players, winner }) => {
   return (
     <Grid container columns={10} spacing={1}>
       <Grid item xs={8} display="flex" alignItems="center">
@@ -33,10 +33,10 @@ const PlayerActivityDetailsStandingsTable = ({ players, winner }) => {
             : 0
         )
         .map((player) => (
-          <PlayerActivityDetailsStandingsTableRow player={player} />
+          <DetailsStandingsTableRow player={player} />
         ))}
     </Grid>
   )
 }
 
-export default PlayerActivityDetailsStandingsTable
+export default DetailsStandingsTable

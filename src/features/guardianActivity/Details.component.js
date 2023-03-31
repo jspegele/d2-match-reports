@@ -3,10 +3,10 @@ import axios from "axios"
 import { Box } from "@mui/material"
 
 import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
-import PlayerActivityDetailsScore from "./PlayerActivityDetailsScore.component"
-import PlayerActivityDetailsStandings from "./PlayerActivityDetailsStandings.component"
+import DetailsScore from "./DetailsScore.component"
+import DetailsStandings from "./DetailsStandings.component"
 
-const PlayerActivityDetails = ({ activity }) => {
+const Details = ({ activity }) => {
   const [carnageReport, setCarnageReport] = useState(null)
 
   useEffect(() => {
@@ -46,11 +46,11 @@ const PlayerActivityDetails = ({ activity }) => {
         DestinyActivityDefinition[activity.activityDetails.directorActivityHash]
           .isPvP && (
             <>
-              <PlayerActivityDetailsScore
+              <DetailsScore
                 activityDetails={carnageReport.activityDetails}
                 teams={carnageReport.teams}
               />
-              <PlayerActivityDetailsStandings
+              <DetailsStandings
                 entries={carnageReport.entries}
                 teams={carnageReport.teams}
               />
@@ -60,4 +60,4 @@ const PlayerActivityDetails = ({ activity }) => {
   )
 }
 
-export default PlayerActivityDetails
+export default Details

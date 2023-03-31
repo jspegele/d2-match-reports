@@ -1,23 +1,23 @@
 import React, { useState } from "react"
 
 import { Box } from "@mui/material"
-import PlayerActivityRow from "./PlayerActivityRow.component"
-import PlayerActivityDetails from "./PlayerActivityDetails.component"
+import HistoryItemRow from "./HistoryItemRow.component"
+import Details from "./Details.component"
 
-const PlayerActivityItem = ({ activity, altRow }) => {
+const HistoryItem = ({ activity, altRow }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   return (
     <Box>
-      <PlayerActivityRow
+      <HistoryItemRow
         activity={activity}
         altRow={altRow}
         activeRow={showDetails}
         toggleShowDetails={() => setShowDetails((prevState) => !prevState)}
       />
-      {showDetails && <PlayerActivityDetails activity={activity} />}
+      {showDetails && <Details activity={activity} />}
     </Box>
   )
 }
 
-export default PlayerActivityItem
+export default HistoryItem

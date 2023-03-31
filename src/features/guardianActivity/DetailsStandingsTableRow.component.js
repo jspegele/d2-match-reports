@@ -1,11 +1,11 @@
 import React from "react"
+import { NavLink } from "react-router-dom"
 
 import { Box, Grid, Link, Typography } from "@mui/material"
 
-import PlayerActivityRowClassIcon from "./PlayerActivityRowClassIcon.component"
-import { NavLink } from "react-router-dom"
+import ClassIcon from "./ClassIcon.component"
 
-const PlayerActivityDetailsStandingsTableRow = ({ player }) => {
+const DetailsStandingsTableRow = ({ player }) => {
   return (
     <>
       <Grid
@@ -45,7 +45,7 @@ const PlayerActivityDetailsStandingsTableRow = ({ player }) => {
           </Link>
         </Typography>
         <Box pl={0.5}>
-          <PlayerActivityRowClassIcon
+          <ClassIcon
             classHash={player.player.classHash}
             size="xsmall"
           />
@@ -73,4 +73,4 @@ const PlayerActivityDetailsStandingsTableRow = ({ player }) => {
   )
 }
 
-export default PlayerActivityDetailsStandingsTableRow
+export default DetailsStandingsTableRow

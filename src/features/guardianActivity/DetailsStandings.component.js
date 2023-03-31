@@ -2,14 +2,14 @@ import React from "react"
 
 import { Grid } from "@mui/material"
 
-import PlayerActivityDetailsStandingsTable from "./PlayerActivityDetailsStandingsTable.component"
+import DetailsStandingsTable from "./DetailsStandingsTable.component"
 
-const PlayerActivityDetailsStandings = ({ entries, teams }) => {
+const DetailsStandings = ({ entries, teams }) => {
   return (
     <Grid container spacing={4}>
       {teams.map((team) => (
         <Grid item xs={teams.length === 1 ? 12 : 6}>
-          <PlayerActivityDetailsStandingsTable
+          <DetailsStandingsTable
             players={entries.filter(
               (entry) => entry.values.team.basic.value === team.teamId
             )}
@@ -21,4 +21,4 @@ const PlayerActivityDetailsStandings = ({ entries, teams }) => {
   )
 }
 
-export default PlayerActivityDetailsStandings
+export default DetailsStandings

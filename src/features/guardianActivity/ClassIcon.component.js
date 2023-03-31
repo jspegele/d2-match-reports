@@ -7,7 +7,7 @@ import { ReactComponent as ClassHunterIcon } from "../../images/icons/class-hunt
 import { ReactComponent as ClassTitanIcon } from "../../images/icons/class-titan.svg"
 import { ReactComponent as ClassWarlockIcon } from "../../images/icons/class-warlock.svg"
 
-const PlayerActivityRowClassIcon = ({ classHash, size = "small", p = 0 }) => {
+const ClassIcon = ({ classHash, size = "small", p = 0 }) => {
   const theme = useTheme()
 
   const height = size === "xsmall" ? "12px" : size === "small" ? "16px" : "20px"
@@ -45,4 +45,4 @@ const PlayerActivityRowClassIcon = ({ classHash, size = "small", p = 0 }) => {
   )
 }
 
-export default PlayerActivityRowClassIcon
+export default ClassIcon

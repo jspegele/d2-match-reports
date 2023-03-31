@@ -6,9 +6,9 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 
 import { getModeDisplayName } from "./getModeDisplayName"
 import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
-import PlayerActivityRowClassIcon from "./PlayerActivityRowClassIcon.component"
+import ClassIcon from "./ClassIcon.component"
 
-const PlayerActivityRow = ({
+const HistoryItemRow = ({
   activity,
   altRow,
   activeRow,
@@ -53,7 +53,7 @@ const PlayerActivityRow = ({
       </Typography>
     </Box>
     <Box alignItems="center" display="flex" px={2}>
-      <PlayerActivityRowClassIcon classHash={activity.classHash} />
+      <ClassIcon classHash={activity.classHash} />
     </Box>
     <Box alignItems="center" display="flex" px={0.5} py={2} width="5rem">
       <Typography fontSize=".875rem">
@@ -86,4 +86,4 @@ const PlayerActivityRow = ({
   </Box>
 )
 
-export default PlayerActivityRow
+export default HistoryItemRow
