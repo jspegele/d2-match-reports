@@ -6,6 +6,7 @@ import { Box, CircularProgress } from "@mui/material"
 import History from "../guardianActivity/History.component"
 import Overview from "./Overview.component"
 import CharacterContainer from "./CharacterContainer.component"
+import StatsContainer from "./StatsContainer.component"
 
 const GuardianPage = () => {
   const { membershipType, membershipId } = useParams()
@@ -41,6 +42,7 @@ const GuardianPage = () => {
         <Box margin="0 auto" maxWidth="750px" minWidth="500px" width="100%">
           <Overview profile={profile} />
           <CharacterContainer  characters={characters} />
+          <StatsContainer />
           <History
             characters={characters}
             membershipType={membershipType}
