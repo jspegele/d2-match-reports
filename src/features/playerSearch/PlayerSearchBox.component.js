@@ -66,6 +66,7 @@ const PlayerSearchBox = ({ displayName, setDisplayName, setSearchResults, search
       value={displayName}
       variant="outlined"
       sx={{
+        backgroundColor: "rgba(18, 18, 18, .75)",
         "& fieldset": {
           borderLeft: "none",
           borderRadius: 0,

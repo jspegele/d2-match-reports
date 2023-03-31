@@ -21,7 +21,7 @@ const PlayerSearchResultsItem = ({ player }) => {
 
   return (
     <ListItem disablePadding>
-      <ListItemButton onClick={handleClick} sx={{ py: 2 }}>
+      <ListItemButton onClick={handleClick} sx={{ borderBottom: "1px solid", borderBottomColor: "text.disabled", py: 2 }}>
         <Box>
           <Typography component="span">
             {player.bungieGlobalDisplayName}
