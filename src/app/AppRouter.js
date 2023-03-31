@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom"
 
 import Layout from "../features/Layout.component"
 import HomePage from "../features/HomePage.component"
-import PlayerHistoryPage from "../features/playerHistory/PlayerHistoryPage.component"
+import GuardianPage from "../features/guardianPage/GuardianPage.component"
 import ManifestPage from "../features/manifest/ManifestPage.component"
 
 const AppRouter = () => {
@@ -11,7 +11,7 @@ const AppRouter = () => {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/:membershipType/:membershipId" element={<PlayerHistoryPage />} />
+        <Route path="/:membershipType/:membershipId" element={<GuardianPage />} />
         <Route path="/manifest" element={<ManifestPage />} />
       </Route>
     </Routes>

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 
-import { Box, CardContent, CircularProgress, Skeleton, Typography } from "@mui/material"
-import PlayerActivityHistory from "./PlayerActivityHistory.component"
+import { Box, CircularProgress, Typography } from "@mui/material"
+import PlayerActivityHistory from "../playerHistory/PlayerActivityHistory.component"
 
-const PlayerHistoryPage = () => {
+const GuardianPage = () => {
   const { membershipType, membershipId } = useParams()
   const [profile, setProfile] = useState(null)
 
@@ -54,4 +54,4 @@ const PlayerHistoryPage = () => {
   )
 }
 
-export default PlayerHistoryPage
+export default GuardianPage
