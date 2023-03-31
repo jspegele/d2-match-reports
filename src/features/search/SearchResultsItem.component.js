@@ -5,7 +5,7 @@ import { Box, ListItem, ListItemButton, Typography } from "@mui/material"
 
 import { AppContext } from "../../contexts/AppContext"
 
-const PlayerSearchResultsItem = ({ player }) => {
+const SearchResultsItem = ({ player }) => {
   const navigate = useNavigate()
   const { closeDrawer } = useContext(AppContext)
 
@@ -40,4 +40,4 @@ const PlayerSearchResultsItem = ({ player }) => {
   )
 }
 
-export default PlayerSearchResultsItem
+export default SearchResultsItem

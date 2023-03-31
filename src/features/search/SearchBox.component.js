@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import axios from "axios"
 
 import { CircularProgress, InputAdornment, TextField } from "@mui/material"
@@ -7,7 +7,7 @@ import SearchIcon from "@mui/icons-material/Search"
 const page = 0
 let controller
 
-const PlayerSearchBox = ({ displayName, setDisplayName, setSearchResults, searching, setSearching }) => {
+const SearchBox = ({ displayName, setDisplayName, setSearchResults, searching, setSearching }) => {
   const handleDisplayNameChange = (e) => setDisplayName(e.target.value)
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const PlayerSearchBox = ({ displayName, setDisplayName, setSearchResults, search
 
     if (displayName.length === 0) setSearchResults([])
     if (displayName.length > 0) fetchPlayerSearchResults()
-  }, [displayName, setSearchResults])
+  }, [setSearching, displayName, setSearchResults])
 
   return (
     <TextField
@@ -77,4 +77,4 @@ const PlayerSearchBox = ({ displayName, setDisplayName, setSearchResults, search
   )
 }
 
-export default PlayerSearchBox
+export default SearchBox

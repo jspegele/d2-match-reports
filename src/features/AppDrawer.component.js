@@ -3,7 +3,7 @@ import React, { useContext } from "react"
 import { Box, Drawer, useMediaQuery } from "@mui/material"
 
 import Header from "./Header.component"
-import PlayerSearch from "./playerSearch/PlayerSearch.component"
+import Search from "./search/Search.component"
 import { AppContext } from "../contexts/AppContext"
 
 import titanImage from "../images/joseph-biwald-d2-guardian-art-titan.jpg"
@@ -35,7 +35,7 @@ const AppDrawer = ({ drawerWidth }) => {
     >
       <Box bgcolor="rgba(18, 18, 18, .95)" height="100%" width="100%">
         <Header />
-        <PlayerSearch />
+        <Search />
       </Box>
     </Drawer>
   )

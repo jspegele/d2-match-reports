@@ -2,10 +2,10 @@ import React, { useState } from "react"
 
 import { Box } from "@mui/material"
 
-import PlayerSearchResults from "./PlayerSearchResults.component"
-import PlayerSearchBox from "./PlayerSearchBox.component"
+import SearchBox from "./SearchBox.component"
+import SearchResults from "./SearchResults.component"
 
-const PlayerSearch = () => {
+const Search = () => {
   const [displayName, setDisplayName] = useState("")
   const [searchResults, setSearchResults] = useState([])
   const [searching, setSearching] = useState(false)
@@ -17,7 +17,7 @@ const PlayerSearch = () => {
       onSubmit={(e) => e.preventDefault()}
       sx={{ width: "100%" }}
     >
-      <PlayerSearchBox
+      <SearchBox
         displayName={displayName}
         setDisplayName={setDisplayName}
         setSearchResults={setSearchResults}
@@ -25,10 +25,10 @@ const PlayerSearch = () => {
         setSearching={setSearching}
       />
       {(searchResults.length > 0 || (!!displayName && !searching)) && (
-        <PlayerSearchResults players={searchResults} searching={searching} />
+        <SearchResults players={searchResults} searching={searching} />
       )}
     </Box>
   )
 }
 
-export default PlayerSearch
+export default Search

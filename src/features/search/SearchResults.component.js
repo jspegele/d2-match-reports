@@ -1,9 +1,9 @@
 import React from "react"
 
 import { Box, List, Typography } from "@mui/material"
-import PlayerSearchResultsItem from "./PlayerSearchResultsItem.component"
+import SearchResultsItem from "./SearchResultsItem.component"
 
-const PlayerSearchResults = ({ players, searching }) => (
+const SearchResults = ({ players, searching }) => (
   <Box
     sx={{
       bgcolor: "rgba((18, 18, 18, 1.0)",
@@ -17,7 +17,7 @@ const PlayerSearchResults = ({ players, searching }) => (
     {players.length > 0 ? (
       <List sx={{ padding: 0 }}>
         {players.map((player, i) => (
-          <PlayerSearchResultsItem key={i} player={player} />
+          <SearchResultsItem key={i} player={player} />
         ))}
       </List>
     ) : (
@@ -28,4 +28,4 @@ const PlayerSearchResults = ({ players, searching }) => (
   </Box>
 )
 
-export default PlayerSearchResults
+export default SearchResults
