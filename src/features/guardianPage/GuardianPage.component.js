@@ -5,10 +5,12 @@ import axios from "axios"
 import { Box, CircularProgress } from "@mui/material"
 import History from "../guardianActivity/History.component"
 import Overview from "./Overview.component"
+import CharacterContainer from "./CharacterContainer.component"
 
 const GuardianPage = () => {
   const { membershipType, membershipId } = useParams()
   const [profile, setProfile] = useState(null)
+  const [characters, setCharacters] = useState(null)
 
   useEffect(() => {
     function fetchCharacters() {
@@ -22,7 +24,8 @@ const GuardianPage = () => {
           }
         )
         .then((res) => {
-          setProfile(res.data.Response)
+          setProfile(res.data.Response.profile.data)
+          setCharacters(res.data.Response.characters.data)
         })
         .catch((error) => {
           console.log(error.message)
@@ -35,10 +38,11 @@ const GuardianPage = () => {
   return (
     <>
       {profile ? (
-        <Box margin="0 auto" maxWidth="700px" minWidth="500px" width="100%">
-          <Overview profile={profile.profile} />
+        <Box margin="0 auto" maxWidth="750px" minWidth="500px" width="100%">
+          <Overview profile={profile} />
+          <CharacterContainer  characters={characters} />
           <History
-            characters={profile.characters.data}
+            characters={characters}
             membershipType={membershipType}
             membershipId={membershipId}
           />

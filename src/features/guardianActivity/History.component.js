@@ -6,11 +6,7 @@ import { Box, Button, Typography } from "@mui/material"
 
 import HistoryItem from "./HistoryItem.component"
 
-const History = ({
-  characters,
-  membershipType,
-  membershipId,
-}) => {
+const History = ({ characters, membershipType, membershipId }) => {
   const [history, setHistory] = useState([])
   const [page, setPage] = useState(0)
   const groupSize = 25
@@ -92,6 +88,14 @@ const History = ({
 
   return (
     <Box sx={{ maxWidth: "800px", width: "100%" }}>
+      <Typography
+        fontSize=".875rem"
+        pb={1}
+        textAlign="center"
+        textTransform="uppercase"
+      >
+        Matches
+      </Typography>
       {history
         .slice(0, numRows)
         .reduce(
@@ -108,8 +112,14 @@ const History = ({
         )
         .map((period, i) => (
           <React.Fragment key={i}>
-            <Box pb={1} pt={3} px={2} width="100%">
-              <Typography textAlign="center">{period}</Typography>
+            <Box pb={1} pt={2} px={2} width="100%">
+              <Typography
+                color="text.secondary"
+                fontSize=".875rem"
+                textAlign="center"
+              >
+                {period}
+              </Typography>
             </Box>
             {history.slice(0, numRows).map((activity, j) => {
               if (
