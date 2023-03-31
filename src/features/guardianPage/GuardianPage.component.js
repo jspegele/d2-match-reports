@@ -36,7 +36,7 @@ const GuardianPage = () => {
     <>
       {profile ? (
         <Box margin="0 auto" maxWidth="700px" minWidth="500px" width="100%">
-          <Overview profile={profile} />
+          <Overview profile={profile.profile} />
           <History
             characters={profile.characters.data}
             membershipType={membershipType}
