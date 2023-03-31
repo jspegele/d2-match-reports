@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 
-import { Box, CircularProgress, Typography } from "@mui/material"
+import { Box, CircularProgress } from "@mui/material"
 import History from "../guardianActivity/History.component"
+import Overview from "./Overview.component"
 
 const GuardianPage = () => {
   const { membershipType, membershipId } = useParams()
@@ -35,10 +36,7 @@ const GuardianPage = () => {
     <>
       {profile ? (
         <Box margin="0 auto" maxWidth="700px" minWidth="500px" width="100%">
-          <Typography fontSize="2.25rem" pb={3} textAlign="center">
-            {profile.profile.data.userInfo.bungieGlobalDisplayName}#
-            {profile.profile.data.userInfo.bungieGlobalDisplayNameCode}{" "}
-          </Typography>
+          <Overview profile={profile} />
           <History
             characters={profile.characters.data}
             membershipType={membershipType}
