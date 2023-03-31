@@ -7,7 +7,7 @@ const ManifestPage = () => {
   const [manifest, setManifest] = useState(null)
 
   useEffect(() => {    
-    function fetchCharacters() {
+    function fetchManifest() {
       axios
         .get(
           `https://www.bungie.net/Platform/Destiny2/Manifest/ `,
@@ -25,7 +25,7 @@ const ManifestPage = () => {
         })
     }
 
-    fetchCharacters()
+    fetchManifest()
   }, [])
 
   return (

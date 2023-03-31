@@ -9,7 +9,7 @@ const Overview = ({ profile }) => {
   const [clan, setClan] = useState(null)
 
   useEffect(() => {
-    function fetchCharacters() {
+    function fetchClan() {
       axios
         .get(
           `https://www.bungie.net/Platform/GroupV2/User/${profile.userInfo.membershipType}/${profile.userInfo.membershipId}/0/1`,
@@ -27,7 +27,7 @@ const Overview = ({ profile }) => {
         })
     }
 
-    fetchCharacters()
+    fetchClan()
   }, [])
 
 

@@ -10,7 +10,7 @@ const Details = ({ activity }) => {
   const [carnageReport, setCarnageReport] = useState(null)
 
   useEffect(() => {
-    function fetchActivityHistory() {
+    function fetchCarnageReport() {
       axios
         .get(
           `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${activity.activityDetails.instanceId}/ `,
@@ -28,7 +28,7 @@ const Details = ({ activity }) => {
         })
     }
 
-    fetchActivityHistory()
+    fetchCarnageReport()
   }, [activity.activityDetails.instanceId])
 
   return (

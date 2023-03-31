@@ -14,7 +14,7 @@ const GuardianPage = () => {
   const [characters, setCharacters] = useState(null)
 
   useEffect(() => {
-    function fetchCharacters() {
+    function fetchProfile() {
       axios
         .get(
           `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=Profiles,Characters`,
@@ -33,7 +33,7 @@ const GuardianPage = () => {
         })
     }
 
-    fetchCharacters()
+    fetchProfile()
   }, [membershipType, membershipId])
 
   return (
