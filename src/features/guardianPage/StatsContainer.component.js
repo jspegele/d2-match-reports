@@ -1,8 +1,34 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 
 import { Box, Typography } from "@mui/material"
+import StatsGeneral from "./StatsGeneral.component"
 
-const StatsContainer = () => {
+const StatsContainer = ({ membershipType, membershipId }) => {
+  const [accountStats, setAccountStats] = useState(null)
+
+  useEffect(() => {
+    function fetchClan() {
+      axios
+        .get(
+          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Stats/ `,
+          {
+            headers: {
+              "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
+            },
+          }
+        )
+        .then((res) => {
+          setAccountStats(res.data.Response)
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
+    }
+
+    fetchClan()
+  }, [])
+
   return (
     <Box pb={6}>
       <Typography
@@ -13,6 +39,13 @@ const StatsContainer = () => {
       >
         Account Stats
       </Typography>
+      <StatsGeneral
+        stats={
+          accountStats
+            ? accountStats.mergedAllCharacters.results.allPvP.allTime
+            : null
+        }
+      />
     </Box>
   )
 }
