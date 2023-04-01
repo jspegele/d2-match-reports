@@ -8,9 +8,11 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 import { ReactComponent as CrucibleIcon } from "../../images/icons/faction-crucible.svg"
 import { ReactComponent as IronBannerIcon } from "../../images/icons/faction-ironbanner.svg"
 import { ReactComponent as TrialsIcon } from "../../images/icons/faction-osiris.svg"
+import { ReactComponent as GambitIcon } from "../../images/icons/gambit.svg"
 
 const ironBannerModes = [19, 43, 44, 45, 68, 90, 91]
 const trialsModes = [39, 41, 42, 84]
+const gambitModes = [63, 75]
 
 const DetailsScore = ({ activityDetails, teams }) => {
   const theme = useTheme()
@@ -40,14 +42,22 @@ const DetailsScore = ({ activityDetails, teams }) => {
             sx={{ height: "64px", width: "64px" }}
           />
         )}
+        {gambitModes.includes(activityDetails.mode) && (
+          <Box
+            component={GambitIcon}
+            fill={theme.palette.text.primary}
+            sx={{ height: "64px", width: "64px" }}
+          />
+        )}
         {!trialsModes.includes(activityDetails.mode) &&
           !ironBannerModes.includes(activityDetails.mode) && (
-            <Box
-              component={CrucibleIcon}
-              fill={theme.palette.text.primary}
-              sx={{ height: "64px", width: "64px" }}
-            />
-          )}
+            !gambitModes.includes(activityDetails.mode) && (
+              <Box
+                component={CrucibleIcon}
+                fill={theme.palette.text.primary}
+                sx={{ height: "64px", width: "64px" }}
+              />
+          ))}
       </Box>
       <Typography fontSize="3rem" fontWeight="700">
         {teams.length ? teams[1].score.basic.value : 1}
