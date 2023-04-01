@@ -16,9 +16,15 @@ const SearchResults = ({ players, searching }) => (
   >
     {players.length > 0 ? (
       <List sx={{ padding: 0 }}>
-        {players.map((player, i) => (
-          <SearchResultsItem key={i} player={player} />
-        ))}
+        {players
+          .filter(
+            (player) =>
+              player.hasOwnProperty("destinyMemberships") &&
+              player.destinyMemberships.length > 0
+          )
+          .map((player, i) => (
+            <SearchResultsItem key={i} player={player} />
+          ))}
       </List>
     ) : (
       <Box p={2}>

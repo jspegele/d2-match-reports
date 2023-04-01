@@ -1,41 +1,45 @@
-import React, { useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 
-import { Box, ListItem, ListItemButton, Typography } from "@mui/material"
+import { ListItem } from "@mui/material"
 
-import { AppContext } from "../../contexts/AppContext"
+import SearchResultsItemButton from "./SearchResultsItemButton.component"
 
 const SearchResultsItem = ({ player }) => {
-  const navigate = useNavigate()
-  const { closeDrawer } = useContext(AppContext)
+  const [characters, setCharacters] = useState(null)
 
-  const handleClick = () => {
-    if (player.destinyMemberships.length > 0) {
-      const primaryMembership = player.destinyMemberships[0]
-      closeDrawer()
-      navigate(
-        `/${primaryMembership.membershipType}/${primaryMembership.membershipId}`
-      )
+  const primaryMembership = player.destinyMemberships[0]
+
+  useEffect(() => {
+    function fetchMemberships() {
+      axios
+        .get(
+          `https://www.bungie.net/Platform/Destiny2/${primaryMembership.membershipType}/Profile/${primaryMembership.membershipId}/?components=Characters`,
+          {
+            headers: {
+              "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
+            },
+          }
+        )
+        .then((res) => {
+          setCharacters(res.data.Response.characters.data)
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
     }
-  }
+
+    fetchMemberships()
+  }, [primaryMembership.membershipType, primaryMembership.membershipId])
 
   return (
     <ListItem disablePadding>
-      <ListItemButton onClick={handleClick} sx={{ borderBottom: "1px solid", borderBottomColor: "text.disabled", py: 2 }}>
-        <Box>
-          <Typography component="span">
-            {player.bungieGlobalDisplayName}
-          </Typography>
-          <Typography
-            component="span"
-            color="text.secondary"
-            fontSize=".75rem"
-            pl={0.5}
-          >
-            #{player.bungieGlobalDisplayNameCode}
-          </Typography>
-        </Box>
-      </ListItemButton>
+      <SearchResultsItemButton
+        characters={characters ? Object.values(characters) : []}
+        displayName={player.bungieGlobalDisplayName}
+        displayNameCode={player.bungieGlobalDisplayNameCode}
+        primaryMembership={primaryMembership}
+      />
     </ListItem>
   )
 }
