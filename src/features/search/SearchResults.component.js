@@ -21,9 +21,13 @@ const SearchResults = ({ players, searching }) => (
         ))}
       </List>
     ) : (
-      <Typography fontSize=".875rem" p={2}>
-        No Guardians Found
-      </Typography>
+      <Box p={2}>
+        <Typography fontSize=".875rem">No Guardians Found.</Typography>
+        <Typography fontSize=".75rem">
+          Try searching for an exact Bungie display name as appears in game (no
+          PSN IDs or Xbox gamertags).
+        </Typography>
+      </Box>
     )}
   </Box>
 )
