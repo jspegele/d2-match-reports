@@ -17,13 +17,13 @@ const DetailsScore = ({ activityDetails, teams }) => {
 
   return (
     <Box alignItems="center" display="flex" justifyContent="center" pb={2}>
-      {teams[0].standing.basic.value === 0 ? (
+      {teams.length && teams[0].standing.basic.value === 0 ? (
         <CheckCircleIcon color="success" sx={{ fontSize: 20, mr: 1 }} />
       ) : (
         <CircleOutlinedIcon color="error" sx={{ fontSize: 20, mr: 1 }} />
       )}
       <Typography fontSize="3rem" fontWeight="700">
-        {teams[0].score.basic.value}
+        {teams.length ? teams[0].score.basic.value : 0}
       </Typography>
       <Box px={4}>
         {trialsModes.includes(activityDetails.mode) && (
@@ -50,9 +50,9 @@ const DetailsScore = ({ activityDetails, teams }) => {
           )}
       </Box>
       <Typography fontSize="3rem" fontWeight="700">
-        {teams[1].score.basic.value}
+        {teams.length ? teams[1].score.basic.value : 1}
       </Typography>
-      {teams[1].standing.basic.value === 0 ? (
+      {teams.length && teams[1].standing.basic.value === 0 ? (
         <CheckCircleIcon color="success" sx={{ fontSize: 20, ml: 1 }} />
       ) : (
         <CircleOutlinedIcon color="error" sx={{ fontSize: 20, ml: 1 }} />

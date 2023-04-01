@@ -16,7 +16,7 @@ const HistoryItem = ({ activity, altRow, mode }) => {
         mode={mode}
         toggleShowDetails={() => setShowDetails((prevState) => !prevState)}
       />
-      {showDetails && <Details activity={activity} />}
+      {showDetails && <Details activity={activity} mode={mode} />}
     </Box>
   )
 }

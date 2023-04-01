@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Box } from "@mui/material"
 
-import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
 import DetailsScore from "./DetailsScore.component"
 import DetailsStandings from "./DetailsStandings.component"
 
-const Details = ({ activity }) => {
+const Details = ({ activity, mode }) => {
   const [carnageReport, setCarnageReport] = useState(null)
 
   useEffect(() => {
@@ -42,20 +41,20 @@ const Details = ({ activity }) => {
       px={2}
       py={4}
     >
-      {carnageReport &&
-        DestinyActivityDefinition[activity.activityDetails.directorActivityHash]
-          .isPvP && (
-            <>
-              <DetailsScore
-                activityDetails={carnageReport.activityDetails}
-                teams={carnageReport.teams}
-              />
-              <DetailsStandings
-                entries={carnageReport.entries}
-                teams={carnageReport.teams}
-              />
-            </>
-        )}
+      {carnageReport && (
+        <>
+          {(mode === 5 || mode === 63) && (
+            <DetailsScore
+              activityDetails={carnageReport.activityDetails}
+              teams={carnageReport.teams}
+            />
+          )}
+          <DetailsStandings
+            entries={carnageReport.entries}
+            teams={carnageReport.teams}
+          />
+        </>
+      )}
     </Box>
   )
 }

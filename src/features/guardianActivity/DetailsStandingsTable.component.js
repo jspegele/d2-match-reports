@@ -4,24 +4,42 @@ import { Grid, Typography } from "@mui/material"
 
 import DetailsStandingsTableRow from "./DetailsStandingsTableRow.component"
 
-const DetailsStandingsTable = ({ players, winner }) => {
+const createData = (label, span, justify = "flex-start") => ({
+  label,
+  span,
+  justify,
+})
+
+const DetailsStandingsTable = ({ players, winner = null, pve = true }) => {
+  const headers = [
+    createData(
+      winner === null ? "Fireteam" : winner ? "Winners" : "Losers",
+      pve ? 4 : 6
+    ),
+    createData("Score", 1, "flex-end"),
+    createData("K", 1, "flex-end"),
+    createData("D", 1, "flex-end"),
+    createData("A", 1, "flex-end"),
+  ]
+
+  if (pve) headers.push(createData("K/D", 1, "flex-end"), createData("KA/D", 1, "flex-end"))
+
   return (
     <Grid container columns={10} spacing={1}>
-      <Grid item xs={8} display="flex" alignItems="center">
-        <Typography color="text.secondary" fontSize=".75rem">
-          {winner ? "Winners" : "Losers"}
-        </Typography>
-      </Grid>
-      <Grid item xs={1} display="flex" alignItems="center" justifyContent="flex-end">
-        <Typography color="text.secondary" fontSize=".75rem">
-          K
-        </Typography>
-      </Grid>
-      <Grid item xs={1} display="flex" alignItems="center" justifyContent="flex-end">
-        <Typography color="text.secondary" fontSize=".75rem">
-          D
-        </Typography>
-      </Grid>
+      {headers.map((header, i) => (
+        <Grid
+          key={i}
+          item
+          xs={header.span}
+          display="flex"
+          alignItems="center"
+          justifyContent={header.justify}
+        >
+          <Typography color="text.secondary" fontSize=".75rem">
+            {header.label}
+          </Typography>
+        </Grid>
+      ))}
       {players
         .sort((a, b) =>
           a.values.killsDeathsRatio.basic.value >
@@ -33,7 +51,11 @@ const DetailsStandingsTable = ({ players, winner }) => {
             : 0
         )
         .map((player) => (
-          <DetailsStandingsTableRow player={player} />
+          <DetailsStandingsTableRow
+            key={player.characterId}
+            player={player}
+            pve={pve}
+          />
         ))}
     </Grid>
   )

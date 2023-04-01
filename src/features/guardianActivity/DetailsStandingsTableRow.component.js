@@ -5,12 +5,25 @@ import { Box, Grid, Link, Typography } from "@mui/material"
 
 import ClassIcon from "./ClassIcon.component"
 
-const DetailsStandingsTableRow = ({ player }) => {
+const DetailsStandingsTableRow = ({ player, pve }) => {
+  const cells = [
+    { value: player.values.score.basic.value },
+    { value: player.values.kills.basic.value },
+    { value: player.values.deaths.basic.value },
+    { value: player.values.assists.basic.value },
+  ]
+
+  if (pve)
+    cells.push(
+      { value: player.values.killsDeathsRatio.basic.displayValue },
+      { value: player.values.efficiency.basic.displayValue }
+    )
+
   return (
     <>
       <Grid
         item
-        xs={8}
+        xs={pve ? 4 : 6}
         display="flex"
         alignItems="center"
         overflow="hidden"
@@ -45,30 +58,21 @@ const DetailsStandingsTableRow = ({ player }) => {
           </Link>
         </Typography>
         <Box pl={0.5}>
-          <ClassIcon
-            classHash={player.player.classHash}
-            size="xsmall"
-          />
+          <ClassIcon classHash={player.player.classHash} size="xsmall" />
         </Box>
       </Grid>
-      <Grid
-        item
-        xs={1}
-        display="flex"
-        alignItems="center"
-        justifyContent="flex-end"
-      >
-        <Typography>{player.values.kills.basic.value}</Typography>
-      </Grid>
-      <Grid
-        item
-        xs={1}
-        display="flex"
-        alignItems="center"
-        justifyContent="flex-end"
-      >
-        <Typography>{player.values.deaths.basic.value}</Typography>
-      </Grid>
+      {cells.map((cell, i) => (
+        <Grid
+          key={i}
+          item
+          xs={1}
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+        >
+          <Typography>{cell.value}</Typography>
+        </Grid>
+      ))}
     </>
   )
 }
