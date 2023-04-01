@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 
 import { Box, Typography } from "@mui/material"
+
 import StatsGeneral from "./StatsGeneral.component"
+import StatsByWeapon from "./StatsByWeapon.component"
 
 const StatsContainer = ({ membershipType, membershipId }) => {
   const [accountStats, setAccountStats] = useState(null)
@@ -40,6 +42,13 @@ const StatsContainer = ({ membershipType, membershipId }) => {
         Account Stats
       </Typography>
       <StatsGeneral
+        stats={
+          accountStats
+            ? accountStats.mergedAllCharacters.results.allPvP.allTime
+            : null
+        }
+      />
+      <StatsByWeapon
         stats={
           accountStats
             ? accountStats.mergedAllCharacters.results.allPvP.allTime

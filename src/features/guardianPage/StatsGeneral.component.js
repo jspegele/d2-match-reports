@@ -31,8 +31,9 @@ const StatsGeneral = ({ stats }) => {
       value: stats ? stats.suicides.basic.value : null,
     },
   ]
+
   return (
-    <Box alignItems="center" display="flex" justifyContent="center">
+    <Box alignItems="center" display="flex" justifyContent="center" p={1}>
       {statsArray.map((stat, i) => (
         <Box
           key={i}
