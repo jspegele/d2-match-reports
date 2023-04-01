@@ -6,13 +6,15 @@ import { Box, Button, Typography } from "@mui/material"
 
 import HistoryItem from "./HistoryItem.component"
 
-const History = ({ characters, membershipType, membershipId }) => {
+const History = ({ characters, membershipType, membershipId, mode }) => {
   const [history, setHistory] = useState([])
   const [page, setPage] = useState(0)
   const groupSize = 25
   const [numRows, setNumRows] = useState(groupSize)
-  const [mode, setMode] = useState(5)
-  // mode=5 is all pvp. for all valid values see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
+
+  useEffect(() => {
+    setHistory([])
+  }, [mode])
 
   useEffect(() => {
     async function fetchActivityHistory() {
@@ -21,7 +23,9 @@ const History = ({ characters, membershipType, membershipId }) => {
       for (let i = 0; i < charIds.length; i++) {
         await axios
           .get(
-            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${charIds[i]}/Stats/Activities/?page=0&mode=${mode}`,
+            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${
+              charIds[i]
+            }/Stats/Activities/?page=0&mode=${mode === "PvE" ? 7 : 5}`,
             {
               headers: {
                 "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
@@ -57,7 +61,10 @@ const History = ({ characters, membershipType, membershipId }) => {
     for (let i = 0; i < charIds.length; i++) {
       await axios
         .get(
-          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${charIds[i]}/Stats/Activities/?page=${page}&mode=${mode}`,
+          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${
+            charIds[i]
+          }/Stats/Activities/?page=${page}&mode=${mode === "PvE" ? 7 : 5}`,
+          // mode=5 is all pvp. mode=7 is all pve. see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
           {
             headers: {
               "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
@@ -132,6 +139,7 @@ const History = ({ characters, membershipType, membershipId }) => {
                     key={activity.activityDetails.instanceId}
                     activity={activity}
                     altRow={j % 2}
+                    mode={mode}
                   />
                 )
               }

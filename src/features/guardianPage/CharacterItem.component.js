@@ -42,7 +42,7 @@ const CharacterItem = ({ character, numChars }) => {
               lineHeight="1.1"
               overflow="hidden"
               textOverflow="ellipsis"
-              textShadow="1px 1px 2px black"
+              sx={{ textShadow: "1px 1px 2px black" }}
             >
               {classTypes[character.classType]}
             </Typography>
@@ -52,7 +52,7 @@ const CharacterItem = ({ character, numChars }) => {
               lineHeight="1.3"
               overflow="hidden"
               textOverflow="ellipsis"
-              textShadow="1px 1px 2px black"
+              sx={{ textShadow: "1px 1px 2px black" }}
             >
               {raceTypes[character.raceType]}{" "}
               {genderTypes[character.genderType]}

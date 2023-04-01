@@ -6,8 +6,9 @@ import { Box, Typography } from "@mui/material"
 import StatsGeneral from "./StatsGeneral.component"
 import StatsByWeapon from "./StatsByWeapon.component"
 
-const StatsContainer = ({ membershipType, membershipId }) => {
+const StatsContainer = ({ membershipType, membershipId, mode }) => {
   const [accountStats, setAccountStats] = useState(null)
+  const statsNode = mode === "PvE" ? "allPvE" : "allPvP"
 
   useEffect(() => {
     function fetchClan() {
@@ -44,14 +45,15 @@ const StatsContainer = ({ membershipType, membershipId }) => {
       <StatsGeneral
         stats={
           accountStats
-            ? accountStats.mergedAllCharacters.results.allPvP.allTime
+            ? accountStats.mergedAllCharacters.results[statsNode].allTime
             : null
         }
+        mode={mode}
       />
       <StatsByWeapon
         stats={
           accountStats
-            ? accountStats.mergedAllCharacters.results.allPvP.allTime
+            ? accountStats.mergedAllCharacters.results[statsNode].allTime
             : null
         }
       />

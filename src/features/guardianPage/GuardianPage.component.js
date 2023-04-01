@@ -7,11 +7,13 @@ import History from "../guardianActivity/History.component"
 import Overview from "./Overview.component"
 import CharacterContainer from "./CharacterContainer.component"
 import StatsContainer from "./StatsContainer.component"
+import ModeTabs from "./ModeTabs.component"
 
 const GuardianPage = () => {
+  const [mode, setMode] = useState("PvP")
   const { membershipType, membershipId } = useParams()
-  const [profile, setProfile] = useState(null)
   const [characters, setCharacters] = useState(null)
+  const [profile, setProfile] = useState(null)
 
   useEffect(() => {
     function fetchProfile() {
@@ -41,19 +43,27 @@ const GuardianPage = () => {
       {profile ? (
         <Box margin="0 auto" maxWidth="750px" minWidth="500px" width="100%">
           <Overview profile={profile} />
-          <CharacterContainer  characters={characters} />
+          <CharacterContainer characters={characters} />
+          <ModeTabs mode={mode} setMode={setMode} />
           <StatsContainer
             membershipType={membershipType}
             membershipId={membershipId}
+            mode={mode}
           />
           <History
             characters={characters}
             membershipType={membershipType}
             membershipId={membershipId}
+            mode={mode}
           />
         </Box>
       ) : (
-        <Box alignItems="center" display="flex" justifyContent="center" flexGrow="1">
+        <Box
+          alignItems="center"
+          display="flex"
+          justifyContent="center"
+          flexGrow="1"
+        >
           <CircularProgress size={40} />
         </Box>
       )}
