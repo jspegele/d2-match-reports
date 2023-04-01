@@ -5,10 +5,11 @@ import SearchResultsItem from "./SearchResultsItem.component"
 
 const SearchResults = ({ players, searching }) => (
   <Box
+    id="test"
     sx={{
-      bgcolor: "rgba((18, 18, 18, 1.0)",
-      maxHeight: "30vh",
-      maxWidth: "400px",
+      borderBottom: "1px solid",
+      borderBottomColor: "text.disabled",
+      maxHeight: "60%",
       overflow: "auto",
       position: "absolute",
       width: "100%",
