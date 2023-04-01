@@ -5,15 +5,15 @@ import { Box, Skeleton, Typography } from "@mui/material"
 // const secToHrs = (seconds) => Math.round(seconds / 60 / 60)
 
 const StatsGeneral = ({ stats, mode }) => {
-  const successNode = mode === "PvE" ? "activitiesCleared" : "activitiesWon"
+  const successNode = mode === 5 ? "activitiesWon" : "activitiesCleared"
 
   const statsArray = [
     {
-      label: mode === "PvE" ? "Activities" : "Matches",
+      label: mode === 5 ? "Matches" : "Activities",
       value: stats ? stats.activitiesEntered.basic.value : null,
     },
     {
-      label: mode === "PvE" ? "Cleared" : "Wins",
+      label: mode === 5 ? "Wins" : "Cleared",
       value: stats ? stats[successNode].basic.value : null,
     },
     {

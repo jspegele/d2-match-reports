@@ -35,8 +35,8 @@ const HistoryItemRow = ({
       }}
     >
       <Box alignItems="center" display="flex" p={2}>
-        {(mode === "PvP" && activity.values.standing && activity.values.standing.basic.value === 0) ||
-        (mode === "PvE" && activity.values.completed.basic.value === 1) ? (
+        {((mode === 5 || mode === 63) && activity.values.standing && activity.values.standing.basic.value === 0) ||
+        (mode === 7 && activity.values.completed.basic.value === 1) ? (
           <CheckCircleIcon color="success" sx={{ fontSize: 20 }} />
         ) : (
           <CircleOutlinedIcon color="error" sx={{ fontSize: 20 }} />

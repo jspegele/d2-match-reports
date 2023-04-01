@@ -23,9 +23,7 @@ const History = ({ characters, membershipType, membershipId, mode }) => {
       for (let i = 0; i < charIds.length; i++) {
         await axios
           .get(
-            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${
-              charIds[i]
-            }/Stats/Activities/?page=0&mode=${mode === "PvE" ? 7 : 5}`,
+            `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${charIds[i]}/Stats/Activities/?page=0&mode=${mode}`,
             {
               headers: {
                 "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
@@ -61,10 +59,7 @@ const History = ({ characters, membershipType, membershipId, mode }) => {
     for (let i = 0; i < charIds.length; i++) {
       await axios
         .get(
-          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${
-            charIds[i]
-          }/Stats/Activities/?page=${page}&mode=${mode === "PvE" ? 7 : 5}`,
-          // mode=5 is all pvp. mode=7 is all pve. see Destiny.HistoricalStats.Definitions.DestinyActivityModeType
+          `https://www.bungie.net/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${charIds[i]}/Stats/Activities/?page=${page}&mode=${mode}`,
           {
             headers: {
               "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,

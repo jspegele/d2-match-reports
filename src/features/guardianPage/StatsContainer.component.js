@@ -8,7 +8,7 @@ import StatsByWeapon from "./StatsByWeapon.component"
 
 const StatsContainer = ({ membershipType, membershipId, mode }) => {
   const [accountStats, setAccountStats] = useState(null)
-  const statsNode = mode === "PvE" ? "allPvE" : "allPvP"
+  const statsNode = mode === 5 ? "allPvP" : "allPvE"
 
   useEffect(() => {
     function fetchClan() {

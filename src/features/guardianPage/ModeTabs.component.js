@@ -12,8 +12,9 @@ const ModeTabs = ({ mode, setMode }) => {
       sx={{ borderBottom: "1px solid", borderColor: "text.secondary" }}
     >
       <Tabs centered onChange={handleChange} value={mode} variant="fullWidth">
-        <Tab label="PvP" value="PvP" />
-        <Tab label="PvE" value="PvE" />
+        <Tab label="PvP" value={5} />
+        <Tab label="PvE" value={7}/>
+        <Tab label="Gambit" value={63} />
       </Tabs>
     </Box>
   )
