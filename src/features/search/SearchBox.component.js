@@ -20,13 +20,14 @@ const SearchBox = ({
     if (controller) controller.abort()
     controller = new AbortController()
 
-    const regex = /[a-zA-Z0-9]+#+[0-9]{4}$/i
+    const regex = /[a-zA-Z0-9]+#+[0-9]}$/i
     let searchName = displayName
     let searchCode = null
 
     function fetchPlayerSearchResults() {
       setSearching(true)
 
+      // if user included a bungieDisplayCode "#NNNN" in search
       if (!!displayName.match(regex)) {
         const split = displayName.split("#")
         searchName = displayName.substring(0, displayName.length - 5)
