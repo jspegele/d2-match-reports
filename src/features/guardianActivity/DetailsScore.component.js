@@ -8,7 +8,7 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 import { ReactComponent as CrucibleIcon } from "../../images/icons/faction-crucible.svg"
 import { ReactComponent as IronBannerIcon } from "../../images/icons/faction-ironbanner.svg"
 import { ReactComponent as TrialsIcon } from "../../images/icons/faction-osiris.svg"
-import { ReactComponent as GambitIcon } from "../../images/icons/gambit.svg"
+import { ReactComponent as GambitIcon } from "../../images/icons/faction-gambit.svg"
 
 const ironBannerModes = [19, 43, 44, 45, 68, 90, 91]
 const trialsModes = [39, 41, 42, 84]
