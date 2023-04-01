@@ -7,20 +7,37 @@ import SearchIcon from "@mui/icons-material/Search"
 const page = 0
 let controller
 
-const SearchBox = ({ displayName, setDisplayName, setSearchResults, searching, setSearching }) => {
+const SearchBox = ({
+  displayName,
+  setDisplayName,
+  setSearchResults,
+  searching,
+  setSearching,
+}) => {
   const handleDisplayNameChange = (e) => setDisplayName(e.target.value)
 
   useEffect(() => {
     if (controller) controller.abort()
     controller = new AbortController()
 
+    const regex = /[a-zA-Z0-9]+#+[0-9]{4}$/i
+    let searchName = displayName
+    let searchCode = null
+
     function fetchPlayerSearchResults() {
       setSearching(true)
+
+      if (!!displayName.match(regex)) {
+        const split = displayName.split("#")
+        searchName = displayName.substring(0, displayName.length - 5)
+        searchCode = split[split.length - 1]
+      }
+
       axios
         .post(
           `https://www.bungie.net/Platform/User/Search/GlobalName/${page}/`,
           {
-            displayNamePrefix: displayName,
+            displayNamePrefix: searchName,
           },
           {
             signal: controller.signal,
@@ -30,7 +47,14 @@ const SearchBox = ({ displayName, setDisplayName, setSearchResults, searching, s
           }
         )
         .then((res) => {
-          setSearchResults(res.data.Response.searchResults)
+          setSearchResults(
+            searchCode
+              ? res.data.Response.searchResults.filter(
+                  (result) =>
+                    result.bungieGlobalDisplayNameCode === parseInt(searchCode)
+                )
+              : res.data.Response.searchResults
+          )
           setSearching(false)
         })
         .catch((error) => {
@@ -51,9 +75,7 @@ const SearchBox = ({ displayName, setDisplayName, setSearchResults, searching, s
     <TextField
       fullWidth
       InputProps={{
-        endAdornment: searching ? (
-          <CircularProgress size={16} />
-        ) : null,
+        endAdornment: searching ? <CircularProgress size={16} /> : null,
         startAdornment: (
           <InputAdornment position="start">
             <SearchIcon sx={{ color: "text.secondary", fontSize: "1.25rem" }} />
