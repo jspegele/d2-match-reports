@@ -29,12 +29,14 @@ const AppDrawer = ({ drawerWidth }) => {
           border: "none",
           boxShadow: "5px 0px 5px 0px rgba(0,0,0,0.25)",
           boxSizing: "border-box",
+          maxWidth: "415px",
+          minWidth: "270px",
           width: drawerWidth,
         },
       }}
     >
       <Box bgcolor="rgba(18, 18, 18, .95)" height="100%" width="100%">
-        <Header />
+        <Header drawer={true} />
         <Search />
       </Box>
     </Drawer>

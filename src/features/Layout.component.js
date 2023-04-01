@@ -9,11 +9,10 @@ import AppDrawer from "./AppDrawer.component"
 import CrucibleBg from "../images/bg-crucible.png"
 
 const Layout = () => {
-  const isSmall = useMediaQuery("(min-width:600px)")
   const isMedium = useMediaQuery("(min-width:900px)")
   const isLarge = useMediaQuery("(min-width:1200px)")
 
-  const drawerWidth = isLarge ? "473px" : isMedium ? "40%" : isSmall ? "60%" : "96%"
+  const drawerWidth = isLarge ? "415px" : isMedium ? "35%" : "100%"
 
   return (
     <>
@@ -34,7 +33,12 @@ const Layout = () => {
           flexGrow="1"
           paddingTop={isMedium ? "2rem" : 0}
           width="100%"
-          sx={{ backgroundImage: `url("${CrucibleBg}")`, backgroundPosition: "center 25vh", backgroundSize: "50vh", backgroundRepeat: "no-repeat" }}
+          sx={{
+            backgroundImage: `url("${CrucibleBg}")`,
+            backgroundPosition: "center 25vh",
+            backgroundSize: "50vh",
+            backgroundRepeat: "no-repeat",
+          }}
         >
           <Outlet />
         </Box>
