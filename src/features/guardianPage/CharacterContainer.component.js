@@ -15,7 +15,12 @@ const CharacterContainer = ({ characters }) => {
       >
         Characters
       </Typography>
-      <Box display="flex" justifyContent={numChars === 3 ? "space-evenly" : "center"} marginX={-0.5}>
+      <Box
+        display="flex"
+        flexWrap="wrap"
+        justifyContent={numChars === 3 ? "space-evenly" : "center"}
+        marginX={-0.5}
+      >
         {Object.keys(characters).map((characterId) => (
           <CharacterItem
             key={characterId}

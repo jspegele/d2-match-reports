@@ -40,7 +40,7 @@ const GuardianPage = () => {
   return (
     <>
       {profile ? (
-        <Box margin="0 auto" maxWidth="750px" minWidth="500px" width="100%">
+        <Box margin="0 auto" maxWidth="750px" width="100%">
           <Overview profile={profile} />
           <CharacterContainer characters={characters} />
           <ModeTabs />

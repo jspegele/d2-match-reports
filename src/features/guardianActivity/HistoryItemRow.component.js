@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 
-import { Box, Typography } from "@mui/material"
+import { Box, Typography, useMediaQuery } from "@mui/material"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 
@@ -11,6 +11,7 @@ import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition
 import ClassIcon from "./ClassIcon.component"
 
 const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
+  const isSmall = useMediaQuery("(min-width: 600px)")
   const { mode } = useContext(AppContext)
   
   return (
@@ -72,27 +73,29 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
           </Typography>
         </Typography>
       </Box>
-      <Box
-        alignItems="center"
-        display="flex"
-        pl={0.5}
-        pr={2}
-        py={2}
-        width="5rem"
-      >
-        <Typography fontSize=".875rem">
-          {activity.values.efficiency.basic.displayValue}
-          <Typography
-            component="span"
-            color="text.secondary"
-            display="inline"
-            fontSize=".675rem"
-            marginLeft="2px"
-          >
-            KA/D
+      {isSmall && (
+        <Box
+          alignItems="center"
+          display="flex"
+          pl={0.5}
+          pr={2}
+          py={2}
+          width="5rem"
+        >
+          <Typography fontSize=".875rem">
+            {activity.values.efficiency.basic.displayValue}
+            <Typography
+              component="span"
+              color="text.secondary"
+              display="inline"
+              fontSize=".675rem"
+              marginLeft="2px"
+            >
+              KA/D
+            </Typography>
           </Typography>
-        </Typography>
-      </Box>
+        </Box>
+      )}
     </Box>
   )
 }
