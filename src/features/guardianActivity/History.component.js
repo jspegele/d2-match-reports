@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { DateTime } from "luxon"
 
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Button, CircularProgress, Typography } from "@mui/material"
 
 import { AppContext } from "../../contexts/AppContext"
 
@@ -101,49 +101,55 @@ const History = ({ characters, membershipType, membershipId }) => {
       >
         Matches
       </Typography>
-      {history
-        .slice(0, numRows)
-        .reduce(
-          (acc, rec) =>
-            acc.includes(
-              DateTime.fromISO(rec.period).toFormat("cccc dd LLL yyyy")
-            )
-              ? acc
-              : [
-                  ...acc,
-                  DateTime.fromISO(rec.period).toFormat("cccc dd LLL yyyy"),
-                ],
-          []
-        )
-        .map((period, i) => (
-          <React.Fragment key={i}>
-            <Box pb={1} pt={2} px={2} width="100%">
-              <Typography
-                color="text.secondary"
-                fontSize=".875rem"
-                textAlign="center"
-              >
-                {period}
-              </Typography>
-            </Box>
-            {history.slice(0, numRows).map((activity, j) => {
-              if (
-                DateTime.fromISO(activity.period).toFormat(
-                  "cccc dd LLL yyyy"
-                ) === period
-              ) {
-                return (
-                  <HistoryItem
-                    key={activity.activityDetails.instanceId}
-                    activity={activity}
-                    altRow={j % 2}
-                  />
-                )
-              }
-              return null
-            })}
-          </React.Fragment>
-        ))}
+      {history.length ? (
+        history
+          .slice(0, numRows)
+          .reduce(
+            (acc, rec) =>
+              acc.includes(
+                DateTime.fromISO(rec.period).toFormat("cccc dd LLL yyyy")
+              )
+                ? acc
+                : [
+                    ...acc,
+                    DateTime.fromISO(rec.period).toFormat("cccc dd LLL yyyy"),
+                  ],
+            []
+          )
+          .map((period, i) => (
+            <React.Fragment key={i}>
+              <Box pb={1} pt={2} px={2} width="100%">
+                <Typography
+                  color="text.secondary"
+                  fontSize=".875rem"
+                  textAlign="center"
+                >
+                  {period}
+                </Typography>
+              </Box>
+              {history.slice(0, numRows).map((activity, j) => {
+                if (
+                  DateTime.fromISO(activity.period).toFormat(
+                    "cccc dd LLL yyyy"
+                  ) === period
+                ) {
+                  return (
+                    <HistoryItem
+                      key={activity.activityDetails.instanceId}
+                      activity={activity}
+                      altRow={j % 2}
+                    />
+                  )
+                }
+                return null
+              })}
+            </React.Fragment>
+          ))
+      ) : (
+        <Box py={4} textAlign="center" width="100%">
+          <CircularProgress size={30} />
+        </Box>
+      )}
       {history.length >= 25 && (
         <Button
           color="primary"
