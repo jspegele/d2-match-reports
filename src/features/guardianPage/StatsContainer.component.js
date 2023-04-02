@@ -43,7 +43,7 @@ const StatsContainer = ({ membershipType, membershipId }) => {
         textAlign="center"
         textTransform="uppercase"
       >
-        Account Stats
+        Account Stats ({ mode === 5 ? "All PvP" : "All PvE"})
       </Typography>
       <StatsGeneral
         stats={
