@@ -33,7 +33,7 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
         },
       }}
     >
-      <Box alignItems="center" display="flex" p={2}>
+      <Box alignItems="center" display="flex" px={isSmall ? 2 : 1}>
         {((mode === 5 || mode === 63) &&
           activity.values.standing &&
           activity.values.standing.basic.value === 0) ||
@@ -43,8 +43,8 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
           <CircleOutlinedIcon color="error" sx={{ fontSize: 20 }} />
         )}
       </Box>
-      <Box alignItems="center" display="flex" pr={0.5} py={2} width="9rem">
-        <Typography color="text.secondary" fontSize=".75rem">
+      <Box alignItems="center" display="flex" overflow="hidden" pr={0.5} py={2} width={isSmall ? "125px" : "100px"}>
+        <Typography color="text.secondary" fontSize=".75rem" overflow="hidden" textOverflow="ellipsis">
           {getModeDisplayName(activity.activityDetails.mode)}
         </Typography>
       </Box>
@@ -56,11 +56,11 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
           }
         </Typography>
       </Box>
-      <Box alignItems="center" display="flex" px={2}>
+      <Box alignItems="center" display="flex" px={isSmall ? 2 : .5}>
         <ClassIcon classHash={activity.classHash} />
       </Box>
-      <Box alignItems="center" display="flex" px={0.5} py={2} width="5rem">
-        <Typography fontSize=".875rem">
+      <Box alignItems="center" display="flex" justifyContent="flex-end" overflow="hidden" px={1} py={2} width={isSmall ? "80px" : "70px"}>
+        <Typography fontSize=".875rem" overflow="hidden" textOverflow="ellipsis">
           {activity.values.killsDeathsRatio.basic.displayValue}
           <Typography
             component="span"
@@ -77,6 +77,7 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
         <Box
           alignItems="center"
           display="flex"
+          justifyContent="flex-end"
           pl={0.5}
           pr={2}
           py={2}

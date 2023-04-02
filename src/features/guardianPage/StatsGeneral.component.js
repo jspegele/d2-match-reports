@@ -35,7 +35,7 @@ const StatsGeneral = ({ stats, mode }) => {
   ]
 
   return (
-    <Box alignItems="center" display="flex" justifyContent="center" p={1}>
+    <Box alignItems="center" display="flex" flexWrap="wrap" justifyContent="center" p={1}>
       {statsArray.map((stat, i) => (
         <Box
           key={i}
@@ -43,7 +43,7 @@ const StatsGeneral = ({ stats, mode }) => {
           display="flex"
           flexDirection="column"
           justifyContent="center"
-          px={2}
+          p={1}
         >
           {stat.value ? (
             <Typography>{stat.value.toLocaleString()}</Typography>

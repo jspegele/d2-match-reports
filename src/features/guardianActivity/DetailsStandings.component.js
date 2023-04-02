@@ -8,7 +8,7 @@ const DetailsStandings = ({ entries, teams }) => (
   <Grid container spacing={4}>
     {teams.length ? (
       teams.map((team) => (
-        <Grid item key={team.teamId} xs={6}>
+        <Grid item key={team.teamId} xs={12} md={6}>
           <DetailsStandingsTable
             players={entries.filter(
               (entry) => entry.values.team.basic.value === team.teamId
