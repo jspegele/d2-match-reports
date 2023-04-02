@@ -65,7 +65,7 @@ const CharacterItem = ({ character, numChars }) => {
               sx={{ height: "8px", width: "8px" }}
             />
             <Typography color="#ffd600" fontSize={isSmall && !isLarge ? ".875rem" : "1rem"}>
-              1800
+              {character.light}
             </Typography>
           </Box>
         </Box>

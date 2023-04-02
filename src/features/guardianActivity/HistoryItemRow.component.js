@@ -13,7 +13,7 @@ import ClassIcon from "./ClassIcon.component"
 const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
   const isSmall = useMediaQuery("(min-width: 600px)")
   const { mode } = useContext(AppContext)
-  
+
   return (
     <Box
       key={activity.activityDetails.instanceId}
@@ -43,8 +43,21 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
           <CircleOutlinedIcon color="error" sx={{ fontSize: 20 }} />
         )}
       </Box>
-      <Box alignItems="center" display="flex" overflow="hidden" pr={0.5} py={2} width={isSmall ? "125px" : "100px"}>
-        <Typography color="text.secondary" fontSize=".75rem" overflow="hidden" textOverflow="ellipsis">
+      <Box
+        alignItems="center"
+        display="flex"
+        overflow="hidden"
+        pr={0.5}
+        py={2}
+        whiteSpace="nowrap"
+        width={isSmall ? "125px" : "100px"}
+      >
+        <Typography
+          color="text.secondary"
+          fontSize=".75rem"
+          overflow="hidden"
+          textOverflow="ellipsis"
+        >
           {getModeDisplayName(activity.activityDetails.mode)}
         </Typography>
       </Box>
@@ -56,11 +69,24 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
           }
         </Typography>
       </Box>
-      <Box alignItems="center" display="flex" px={isSmall ? 2 : .5}>
+      <Box alignItems="center" display="flex" px={isSmall ? 2 : 0.5}>
         <ClassIcon classHash={activity.classHash} />
       </Box>
-      <Box alignItems="center" display="flex" justifyContent="flex-end" overflow="hidden" px={1} py={2} width={isSmall ? "80px" : "70px"}>
-        <Typography fontSize=".875rem" overflow="hidden" textOverflow="ellipsis">
+      <Box
+        alignItems="center"
+        display="flex"
+        justifyContent="flex-end"
+        overflow="hidden"
+        px={1}
+        py={2}
+        whiteSpace="nowrap"
+        width={isSmall ? "80px" : "70px"}
+      >
+        <Typography
+          fontSize=".875rem"
+          overflow="hidden"
+          textOverflow="ellipsis"
+        >
           {activity.values.killsDeathsRatio.basic.displayValue}
           <Typography
             component="span"

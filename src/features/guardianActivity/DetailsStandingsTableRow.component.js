@@ -2,9 +2,9 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 import { Box, Grid, Link, Typography } from "@mui/material"
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 import ClassIcon from "./ClassIcon.component"
+import MoreInfo from "./MoreInfo.component"
 
 const DetailsStandingsTableRow = ({ player, pve }) => {
   const cells = [
@@ -75,7 +75,12 @@ const DetailsStandingsTableRow = ({ player, pve }) => {
         </Grid>
       ))}
       <Grid item xs={1} alignItems="center" display="flex">
-        <MoreVertIcon sx={{ fontSize: 20 }} />
+        <MoreInfo
+          displayName={player.player.destinyUserInfo.bungieGlobalDisplayName}
+          characterClass={player.player.characterClass}
+          lightLevel={player.player.lightLevel}
+          extended={player.extended}
+        />
       </Grid>
     </>
   )
