@@ -5,7 +5,7 @@ import { Grid } from "@mui/material"
 import DetailsStandingsTable from "./DetailsStandingsTable.component"
 
 const DetailsStandings = ({ entries, teams }) => (
-  <Grid container spacing={4}>
+  <Grid container spacing={6}>
     {teams.length ? (
       teams.map((team) => (
         <Grid item key={team.teamId} xs={12} md={6}>

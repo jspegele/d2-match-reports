@@ -2,28 +2,29 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 import { Box, Grid, Link, Typography } from "@mui/material"
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 import ClassIcon from "./ClassIcon.component"
 
 const DetailsStandingsTableRow = ({ player, pve }) => {
   const cells = [
-    { value: player.values.score.basic.value },
-    { value: player.values.kills.basic.value },
-    { value: player.values.deaths.basic.value },
-    { value: player.values.assists.basic.value },
+    { value: player.values.kills.basic.value, span: pve ? 1 : 2 },
+    { value: player.values.deaths.basic.value, span: pve ? 1 : 2 },
   ]
 
   if (pve)
     cells.push(
-      { value: player.values.killsDeathsRatio.basic.displayValue },
-      { value: player.values.efficiency.basic.displayValue }
+      { value: player.values.assists.basic.value, span: 1 },
+      { value: player.values.killsDeathsRatio.basic.displayValue, span: 2 },
+      { value: player.values.efficiency.basic.displayValue, span: 2 },
+      { value: player.values.score.basic.value, span: 2 },
     )
 
   return (
     <>
       <Grid
         item
-        xs={pve ? 4 : 6}
+        xs={pve ? 10 : 15}
         display="flex"
         alignItems="center"
         overflow="hidden"
@@ -65,14 +66,17 @@ const DetailsStandingsTableRow = ({ player, pve }) => {
         <Grid
           key={i}
           item
-          xs={1}
-          display="flex"
+          xs={cell.span}
           alignItems="center"
+          display="flex"
           justifyContent="flex-end"
         >
           <Typography>{cell.value}</Typography>
         </Grid>
       ))}
+      <Grid item xs={1} alignItems="center" display="flex">
+        <MoreVertIcon sx={{ fontSize: 20 }} />
+      </Grid>
     </>
   )
 }

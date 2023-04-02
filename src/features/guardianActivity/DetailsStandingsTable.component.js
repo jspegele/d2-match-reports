@@ -14,18 +14,22 @@ const DetailsStandingsTable = ({ players, winner = null, pve = true }) => {
   const headers = [
     createData(
       winner === null ? "Fireteam" : winner ? "Winners" : "Losers",
-      pve ? 4 : 6
+      pve ? 10 : 15
     ),
-    createData("Score", 1, "flex-end"),
-    createData("K", 1, "flex-end"),
-    createData("D", 1, "flex-end"),
-    createData("A", 1, "flex-end"),
+    createData("K", pve ? 1 : 2, "flex-end"),
+    createData("D", pve ? 1 : 2, "flex-end"),
   ]
 
-  if (pve) headers.push(createData("K/D", 1, "flex-end"), createData("KA/D", 1, "flex-end"))
+  if (pve)
+    headers.push(
+      createData("A", 1, "flex-end"),
+      createData("K/D", 2, "flex-end"),
+      createData("KA/D", 2, "flex-end"),
+      createData("Score", 2, "flex-end")
+    )
 
   return (
-    <Grid container columns={10} spacing={1}>
+    <Grid container columns={20} spacing={1}>
       {headers.map((header, i) => (
         <Grid
           key={i}
@@ -40,6 +44,7 @@ const DetailsStandingsTable = ({ players, winner = null, pve = true }) => {
           </Typography>
         </Grid>
       ))}
+      <Grid item xs={1}></Grid>
       {players
         .sort((a, b) =>
           a.values.killsDeathsRatio.basic.value >
