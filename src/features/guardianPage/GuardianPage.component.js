@@ -10,8 +10,6 @@ import StatsContainer from "./StatsContainer.component"
 import ModeTabs from "./ModeTabs.component"
 
 const GuardianPage = () => {
-  const [mode, setMode] = useState(5)
-  // PvP=5, PvE=7, Gambit=63
   const { membershipType, membershipId } = useParams()
   const [characters, setCharacters] = useState(null)
   const [profile, setProfile] = useState(null)
@@ -45,17 +43,15 @@ const GuardianPage = () => {
         <Box margin="0 auto" maxWidth="750px" minWidth="500px" width="100%">
           <Overview profile={profile} />
           <CharacterContainer characters={characters} />
-          <ModeTabs mode={mode} setMode={setMode} />
+          <ModeTabs />
           <StatsContainer
             membershipType={membershipType}
             membershipId={membershipId}
-            mode={mode}
           />
           <History
             characters={characters}
             membershipType={membershipType}
             membershipId={membershipId}
-            mode={mode}
           />
         </Box>
       ) : (

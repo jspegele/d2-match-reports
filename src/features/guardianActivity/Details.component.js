@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { Box } from "@mui/material"
+
+import { AppContext } from "../../contexts/AppContext"
 
 import DetailsScore from "./DetailsScore.component"
 import DetailsStandings from "./DetailsStandings.component"
 
-const Details = ({ activity, mode }) => {
+const Details = ({ activity }) => {
+  const { mode } = useContext(AppContext)
   const [carnageReport, setCarnageReport] = useState(null)
 
   useEffect(() => {

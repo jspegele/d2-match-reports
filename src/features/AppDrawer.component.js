@@ -10,13 +10,13 @@ import titanImage from "../images/joseph-biwald-d2-guardian-art-titan.jpg"
 
 const AppDrawer = ({ drawerWidth }) => {
   const isMedium = useMediaQuery("(min-width:900px)")
-  const { closeDrawer, selectDrawerState } = useContext(AppContext)
+  const { drawerOpen, closeDrawer } = useContext(AppContext)
   
   return (
     <Drawer
       anchor="left"
       elevation={0}
-      open={selectDrawerState()}
+      open={drawerOpen}
       onClose={closeDrawer}
       variant={isMedium ? "permanent" : "temporary"}
       sx={{

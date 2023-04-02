@@ -4,7 +4,7 @@ import { Box } from "@mui/material"
 import HistoryItemRow from "./HistoryItemRow.component"
 import Details from "./Details.component"
 
-const HistoryItem = ({ activity, altRow, mode }) => {
+const HistoryItem = ({ activity, altRow }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   return (
@@ -13,10 +13,9 @@ const HistoryItem = ({ activity, altRow, mode }) => {
         activity={activity}
         altRow={altRow}
         activeRow={showDetails}
-        mode={mode}
         toggleShowDetails={() => setShowDetails((prevState) => !prevState)}
       />
-      {showDetails && <Details activity={activity} mode={mode} />}
+      {showDetails && <Details activity={activity} />}
     </Box>
   )
 }

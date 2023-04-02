@@ -1,8 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 
 import { Box, Tab, Tabs } from "@mui/material"
 
-const ModeTabs = ({ mode, setMode }) => {
+import { AppContext } from "../../contexts/AppContext"
+
+const ModeTabs = () => {
+  const { mode, setMode } = useContext(AppContext)
+
   const handleChange = (event, newValue) => setMode(newValue)
 
   return (

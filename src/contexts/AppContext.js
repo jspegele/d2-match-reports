@@ -4,6 +4,7 @@ export const AppContext = createContext()
 
 const initialState = {
   drawerOpen: false,
+  mode: 5, // PvP=5, PvE=7, Gambit=63
 }
 
 export const AppProvider = (props) => {
@@ -15,15 +16,17 @@ export const AppProvider = (props) => {
   const closeDrawer = () =>
     setAppState((prevState) => ({ ...prevState, drawerOpen: false }))
 
-  const selectDrawerState = () => appState.drawerOpen
+  const setMode = (mode) => setAppState(prevState => ({ ...prevState, mode }))
 
   return (
     <AppContext.Provider
       value={{
         appState,
+        drawerOpen: appState.drawerOpen,
+        mode: appState.mode,
         openDrawer,
         closeDrawer,
-        selectDrawerState,
+        setMode,
       }}
     >
       {props.children}

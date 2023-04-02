@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { DateTime } from "luxon"
 
 import { Box, Button, Typography } from "@mui/material"
 
+import { AppContext } from "../../contexts/AppContext"
+
 import HistoryItem from "./HistoryItem.component"
 
-const History = ({ characters, membershipType, membershipId, mode }) => {
+const History = ({ characters, membershipType, membershipId }) => {
+  const { mode } = useContext(AppContext)
   const [history, setHistory] = useState([])
   const [page, setPage] = useState(0)
   const groupSize = 25
@@ -134,7 +137,6 @@ const History = ({ characters, membershipType, membershipId, mode }) => {
                     key={activity.activityDetails.instanceId}
                     activity={activity}
                     altRow={j % 2}
-                    mode={mode}
                   />
                 )
               }

@@ -1,20 +1,18 @@
-import React from "react"
+import React, { useContext } from "react"
 
 import { Box, Typography } from "@mui/material"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 
+import { AppContext } from "../../contexts/AppContext"
+
 import { getModeDisplayName } from "./getModeDisplayName"
 import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
 import ClassIcon from "./ClassIcon.component"
 
-const HistoryItemRow = ({
-  activity,
-  altRow,
-  activeRow,
-  mode,
-  toggleShowDetails,
-}) => {
+const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
+  const { mode } = useContext(AppContext)
+  
   return (
     <Box
       key={activity.activityDetails.instanceId}
@@ -35,7 +33,9 @@ const HistoryItemRow = ({
       }}
     >
       <Box alignItems="center" display="flex" p={2}>
-        {((mode === 5 || mode === 63) && activity.values.standing && activity.values.standing.basic.value === 0) ||
+        {((mode === 5 || mode === 63) &&
+          activity.values.standing &&
+          activity.values.standing.basic.value === 0) ||
         (mode === 7 && activity.values.completed.basic.value === 1) ? (
           <CheckCircleIcon color="success" sx={{ fontSize: 20 }} />
         ) : (

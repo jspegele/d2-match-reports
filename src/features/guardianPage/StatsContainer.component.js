@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import axios from "axios"
 
 import { Box, Typography } from "@mui/material"
 
+import { AppContext } from "../../contexts/AppContext"
+
 import StatsGeneral from "./StatsGeneral.component"
 import StatsByWeapon from "./StatsByWeapon.component"
 
-const StatsContainer = ({ membershipType, membershipId, mode }) => {
+const StatsContainer = ({ membershipType, membershipId }) => {
+  const { mode } = useContext(AppContext)
   const [accountStats, setAccountStats] = useState(null)
   const statsNode = mode === 5 ? "allPvP" : "allPvE"
 
