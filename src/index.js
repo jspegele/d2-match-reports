@@ -7,6 +7,8 @@ import { CssBaseline } from "@mui/material"
 import CustomizedTheme from "./app/CustomizedTheme"
 import AppProvider from "./contexts/AppContext"
 
+import "./app/firebase"
+
 import App from "./App"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
