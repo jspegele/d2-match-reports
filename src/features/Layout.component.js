@@ -1,16 +1,21 @@
-import React from "react"
+import React, { useContext } from "react"
 
 import { Box, useMediaQuery } from "@mui/material"
 import { Outlet } from "react-router-dom"
+
+import { AppContext } from "../contexts/AppContext"
 
 import Header from "./Header.component"
 import AppDrawer from "./AppDrawer.component"
 
 import CrucibleBg from "../images/bg-crucible.png"
+import GambitBg from "../images/bg-gambit.png"
+import VanguardBg from "../images/bg-vanguard.png"
 
 const Layout = () => {
   const isMedium = useMediaQuery("(min-width:900px)")
   const isLarge = useMediaQuery("(min-width:1200px)")
+  const { mode } = useContext(AppContext)
 
   const drawerWidth = isLarge ? "415px" : isMedium ? "35%" : "100%"
 
@@ -34,7 +39,9 @@ const Layout = () => {
           paddingTop={isMedium ? "2rem" : 0}
           width="100%"
           sx={{
-            backgroundImage: `url("${CrucibleBg}")`,
+            backgroundImage: `url("${
+              mode === 5 ? CrucibleBg : mode === 63 ? GambitBg : VanguardBg
+            }")`,
             backgroundPosition: "center 25vh",
             backgroundSize: "50vh",
             backgroundRepeat: "no-repeat",
