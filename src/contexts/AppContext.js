@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react"
 export const AppContext = createContext()
 
 const initialState = {
-  drawerOpen: false,
+  drawerOpen: true,
   mode: 5, // PvP=5, PvE=7, Gambit=63
 }
 
