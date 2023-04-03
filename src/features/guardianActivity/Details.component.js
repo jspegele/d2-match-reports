@@ -15,7 +15,7 @@ const Details = ({ activity }) => {
     function fetchCarnageReport() {
       axios
         .get(
-          `https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${activity.activityDetails.instanceId}/ `,
+          `https://stats.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/${activity.activityDetails.instanceId}/ `,
           {
             headers: {
               "X-API-Key": process.env.REACT_APP_BUNGIE_API_KEY,
