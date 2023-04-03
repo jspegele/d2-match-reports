@@ -65,7 +65,7 @@ const Header = ({ drawer = false }) => {
           textAlign="center"
           textTransform="uppercase"
         >
-          D2 Match Reports
+          D2 Activity Reports
         </Typography>
       </Link>
     </Box>
