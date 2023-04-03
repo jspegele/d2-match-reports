@@ -21,6 +21,7 @@ const Overview = ({ profile }) => {
         )
         .then((res) => {
           if (res.data.Response.results && res.data.Response.results.length) setClan(res.data.Response.results[0].group)
+          else setClan({ name: "Freelancer" })
         })
         .catch((error) => {
           console.log(error.message)
@@ -28,7 +29,7 @@ const Overview = ({ profile }) => {
     }
 
     fetchClan()
-  }, [])
+  }, [profile.userInfo.membershipType, profile.userInfo.membershipId])
 
 
   return (
