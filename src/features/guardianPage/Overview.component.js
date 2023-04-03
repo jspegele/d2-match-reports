@@ -20,7 +20,7 @@ const Overview = ({ profile }) => {
           }
         )
         .then((res) => {
-          setClan(res.data.Response.results[0].group)
+          if (res.data.Response.results && res.data.Response.results.length) setClan(res.data.Response.results[0].group)
         })
         .catch((error) => {
           console.log(error.message)

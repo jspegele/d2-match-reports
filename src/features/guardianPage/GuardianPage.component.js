@@ -16,6 +16,8 @@ const GuardianPage = () => {
 
   useEffect(() => {
     function fetchProfile() {
+      setCharacters(null)
+      setProfile(null)
       axios
         .get(
           `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=Profiles,Characters`,

@@ -21,7 +21,7 @@ const History = ({ characters, membershipType, membershipId }) => {
 
   useEffect(() => {
     async function fetchActivityHistory() {
-      let charData = { 1: {}, 2: {}, 3: {} }
+      let charData = { 0: [], 1: [], 2: [] }
       let charIds = Object.keys(characters)
       for (let i = 0; i < charIds.length; i++) {
         await axios
@@ -34,11 +34,13 @@ const History = ({ characters, membershipType, membershipId }) => {
             }
           )
           .then((res) => {
-            charData[i] = res.data.Response.activities.map((activity) => ({
-              characterId: charIds[i],
-              classHash: characters[charIds[i]].classHash,
-              ...activity,
-            }))
+            if (res.data.Response.activities && res.data.Response.activities.length) {
+              charData[i] = res.data.Response.activities.map((activity) => ({
+                characterId: charIds[i],
+                classHash: characters[charIds[i]].classHash,
+                ...activity,
+              }))
+            }
           })
           .catch((error) => {
             console.log(error.message)
