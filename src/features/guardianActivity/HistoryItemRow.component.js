@@ -5,14 +5,13 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 
 import { AppContext } from "../../contexts/AppContext"
-
 import { getModeDisplayName } from "./getModeDisplayName"
-import DestinyActivityDefinition from "../../manifests/DestinyActivityDefinition.json"
+
 import ClassIcon from "./ClassIcon.component"
 
 const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
   const isSmall = useMediaQuery("(min-width: 600px)")
-  const { mode } = useContext(AppContext)
+  const { mode, selectActivityName } = useContext(AppContext)
 
   return (
     <Box
@@ -63,10 +62,7 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
       </Box>
       <Box alignItems="center" display="flex" flexGrow={1} pr={0.5} py={2}>
         <Typography fontSize=".875rem">
-          {
-            DestinyActivityDefinition[activity.activityDetails.referenceId]
-              .displayProperties.name
-          }
+          {selectActivityName(activity.activityDetails.referenceId)}
         </Typography>
       </Box>
       <Box alignItems="center" display="flex" px={isSmall ? 2 : 0.5}>

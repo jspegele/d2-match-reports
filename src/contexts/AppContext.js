@@ -21,6 +21,12 @@ export const AppProvider = (props) => {
     setAppState((prevState) => ({ ...prevState, manifest }))
 
   const setMode = (mode) => setAppState((prevState) => ({ ...prevState, mode }))
+  
+  const selectActivityName = (refId) => 
+    appState.manifest.DestinyActivityDefinition &&
+    appState.manifest.DestinyActivityDefinition[refId]
+      ? appState.manifest.DestinyActivityDefinition[refId].name
+      : ""
 
   const selectInventoryItem = (refId) =>
     appState.manifest.DestinyInventoryItemLiteDefinition &&
@@ -39,6 +45,7 @@ export const AppProvider = (props) => {
         closeDrawer,
         setManifest,
         setMode,
+        selectActivityName,
         selectInventoryItem,
       }}
     >
