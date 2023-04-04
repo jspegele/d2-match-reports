@@ -27,3 +27,5 @@ const DetailsStandings = ({ entries, teams }) => (
 )
 
 export default DetailsStandings
+
+console.log('test')

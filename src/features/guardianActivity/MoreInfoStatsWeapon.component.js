@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { getDatabase, ref, get } from "firebase/database"
+import React, { useContext } from 'react'
 
 import { Box, Skeleton, Typography } from "@mui/material"
 
-const MoreInfoStatsWeapon = ({ referenceId }) => {
-  const database = getDatabase()
-  const [weapon, setWeapon] = useState({})
+import { AppContext } from "../../contexts/AppContext"
 
-  useEffect(() => {
-    get(ref(database, `DestinyInventoryItemDefinition/${referenceId}/displayProperties`))
-      .then((snap) => {
-        setWeapon(snap.val())
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }, [database, referenceId])
+const MoreInfoStatsWeapon = ({ referenceId }) => {
+  const { selectInventoryItem } = useContext(AppContext)
+  const item = selectInventoryItem(referenceId)
 
   return (
     <Box alignItems="center" display="flex">
-      {weapon.icon ? (
+      {item.icon ? (
         <Box
           component="img"
           alt=""
-          src={`https://bungie.net/${weapon.icon}`}
+          src={`https://bungie.net/${item.icon}`}
           borderRadius="3px"
           height="16px"
           mr={1}
@@ -32,9 +23,9 @@ const MoreInfoStatsWeapon = ({ referenceId }) => {
       ) : (
         <Skeleton height={16} variant="rectangle" width={16} sx={{ marginRight: 1 }} />
       )}
-      {weapon.name ? (
+      {item.name ? (
         <Typography fontSize=".75rem" overflow="hidden" textOverflow="ellipsis">
-          {weapon.name}
+          {item.name}
         </Typography>
       ) : (
         <Skeleton height={16}  width={100} />
