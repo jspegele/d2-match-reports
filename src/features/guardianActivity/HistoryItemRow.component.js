@@ -5,13 +5,13 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined"
 
 import { AppContext } from "../../contexts/AppContext"
-import { getModeDisplayName } from "./getModeDisplayName"
 
 import ClassIcon from "./ClassIcon.component"
 
 const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
   const isSmall = useMediaQuery("(min-width: 600px)")
-  const { mode, selectActivityName } = useContext(AppContext)
+  const { mode, selectActivityName, selectActivityModeNameByType } =
+    useContext(AppContext)
 
   return (
     <Box
@@ -57,7 +57,7 @@ const HistoryItemRow = ({ activity, altRow, activeRow, toggleShowDetails }) => {
           overflow="hidden"
           textOverflow="ellipsis"
         >
-          {getModeDisplayName(activity.activityDetails.mode)}
+          {selectActivityModeNameByType(activity.activityDetails.mode)}
         </Typography>
       </Box>
       <Box alignItems="center" display="flex" flexGrow={1} pr={0.5} py={2}>

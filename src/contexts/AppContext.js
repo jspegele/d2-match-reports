@@ -27,6 +27,16 @@ export const AppProvider = (props) => {
     appState.manifest.DestinyActivityDefinition[activityHash]
       ? appState.manifest.DestinyActivityDefinition[activityHash].name
       : ""
+  
+  const selectActivityModeNameByType = (activityModeType) => {
+    const definition = appState.manifest.DestinyActivityModeDefinition
+    let name = ""
+    Object.keys(definition).forEach(key => {
+      const mode = definition[key]
+      if (mode.modeType === activityModeType) name = mode.name
+    })
+    return name
+  }
 
   const selectClassName = (classHash) =>
     appState.manifest.DestinyClassDefinition &&
@@ -52,6 +62,7 @@ export const AppProvider = (props) => {
         setManifest,
         setMode,
         selectActivityName,
+        selectActivityModeNameByType,
         selectClassName,
         selectInventoryItem,
       }}
