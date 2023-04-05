@@ -5,27 +5,23 @@ import { Grid } from "@mui/material"
 import DetailsStandingsTable from "./DetailsStandingsTable.component"
 
 const DetailsStandings = ({ entries, teams }) => (
-  <Grid container spacing={6}>
-    {teams.length ? (
+    teams.length ? (
       teams.map((team) => (
-        <Grid item key={team.teamId} xs={12} md={6}>
-          <DetailsStandingsTable
-            players={entries.filter(
-              (entry) => entry.values.team.basic.value === team.teamId
-            )}
-            winner={team.standing.basic.value === 0}
-            pve={false}
-          />
+        <Grid container spacing={6}>
+          <Grid item key={team.teamId} xs={12} md={6}>
+            <DetailsStandingsTable
+              players={entries.filter(
+                (entry) => entry.values.team.basic.value === team.teamId
+              )}
+              winner={team.standing.basic.value === 0}
+              pve={false}
+            />
+          </Grid>
         </Grid>
       ))
     ) : (
-      <Grid item xs={12}>
-        <DetailsStandingsTable players={entries} />
-      </Grid>
-    )}
-  </Grid>
+      <DetailsStandingsTable players={entries} />
+    )
 )
 
 export default DetailsStandings
-
-console.log('test')
