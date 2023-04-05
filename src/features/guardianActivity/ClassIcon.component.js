@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 
 import { useTheme } from "@emotion/react"
 import { Box } from "@mui/material"
+
+import { AppContext } from "../../contexts/AppContext"
 
 import { ReactComponent as ClassHunterIcon } from "../../images/icons/class-hunter.svg"
 import { ReactComponent as ClassTitanIcon } from "../../images/icons/class-titan.svg"
@@ -9,6 +11,8 @@ import { ReactComponent as ClassWarlockIcon } from "../../images/icons/class-war
 
 const ClassIcon = ({ classHash, size = "small", p = 0 }) => {
   const theme = useTheme()
+  const { selectClassName } = useContext(AppContext)
+  const classname = selectClassName(classHash)
 
   const height = size === "xsmall" ? "12px" : size === "small" ? "16px" : "20px"
   const width = size === "xsmall" ? "12px" : size === "small" ? "16px" : "20px"
@@ -20,21 +24,21 @@ const ClassIcon = ({ classHash, size = "small", p = 0 }) => {
       justifyContent="center"
       p={p}
     >
-      {classHash === 671679327 && (
-        <Box
-          component={ClassHunterIcon}
-          fill={theme.palette.text.secondary}
-          sx={{ height, width }}
-        />
-      )}
-      {classHash === 3655393761 && (
+      {classname === "Titan" && (
         <Box
           component={ClassTitanIcon}
           fill={theme.palette.text.secondary}
           sx={{ height, width }}
         />
       )}
-      {classHash === 2271682572 && (
+      {classname === "Hunter" && (
+        <Box
+          component={ClassHunterIcon}
+          fill={theme.palette.text.secondary}
+          sx={{ height, width }}
+        />
+      )}
+      {classname === "Warlock" && (
         <Box
           component={ClassWarlockIcon}
           fill={theme.palette.text.secondary}

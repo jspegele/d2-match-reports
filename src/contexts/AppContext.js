@@ -22,16 +22,22 @@ export const AppProvider = (props) => {
 
   const setMode = (mode) => setAppState((prevState) => ({ ...prevState, mode }))
   
-  const selectActivityName = (refId) => 
+  const selectActivityName = (activityHash) => 
     appState.manifest.DestinyActivityDefinition &&
-    appState.manifest.DestinyActivityDefinition[refId]
-      ? appState.manifest.DestinyActivityDefinition[refId].name
+    appState.manifest.DestinyActivityDefinition[activityHash]
+      ? appState.manifest.DestinyActivityDefinition[activityHash].name
       : ""
 
-  const selectInventoryItem = (refId) =>
+  const selectClassName = (classHash) =>
+    appState.manifest.DestinyClassDefinition &&
+    appState.manifest.DestinyClassDefinition[classHash]
+      ? appState.manifest.DestinyClassDefinition[classHash].name
+      : ""
+
+  const selectInventoryItem = (itemHash) =>
     appState.manifest.DestinyInventoryItemLiteDefinition &&
-    appState.manifest.DestinyInventoryItemLiteDefinition[refId]
-      ? appState.manifest.DestinyInventoryItemLiteDefinition[refId]
+    appState.manifest.DestinyInventoryItemLiteDefinition[itemHash]
+      ? appState.manifest.DestinyInventoryItemLiteDefinition[itemHash]
       : { name: "", icon: null }
 
   return (
@@ -46,6 +52,7 @@ export const AppProvider = (props) => {
         setManifest,
         setMode,
         selectActivityName,
+        selectClassName,
         selectInventoryItem,
       }}
     >
